@@ -7,3 +7,6 @@ Wait until an input is high. When the input is high, continuously produce 20ms p
 
 Details are on the project page:
 http://www.swharden.com/wp/2016-07-28-opto-isolated-laser-controller-build/
+
+
+![demo](schematic.png)
