@@ -35,4 +35,10 @@ PORTD&=~(1<<PD6); // sets PD6 low
 PORTD^=(1<<PD6); // flips the state of PD6
 ```
 
-## Timer setup
+## Common Pinouts
+
+![](resources/ATMega328.png)
+
+![](resources/ATTiny2313.png)
+
+![](resources/ATTiny45.png)
