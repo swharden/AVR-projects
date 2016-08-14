@@ -6,7 +6,9 @@ This repository contains a growing collection of individual AVR project files fo
 * [AVR timer calculator] (http://eleccelerator.com/avr-timer-calculator/)
 
 # Programming 
-I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII.
+I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definately check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.
+
+![avrdudess](resources/AVRDudess.jpg)
 
 ## Software
 * Just install [WinAVR] (https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
