@@ -2,10 +2,12 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
 
 // clock source is EXT and delivered into PA0
 // CKOUT is enabled so square waves come out PD2
-
+// watchdog is also enabled for ~1s if the 200Hz isn't called.
+// this is set with the fuse [WDTON=0]
 
 volatile char NEXTB=0;
 volatile int NEXTPWM=0;
@@ -13,6 +15,7 @@ volatile int ticks=0; // % doesn't work with char
 ISR(TIMER1_COMPA_vect){
 	PORTB=NEXTB; // do this first so there's no delay due to ifs
 	OCR0A=NEXTPWM; // do this for consistency
+	wdt_reset(); // reset watchdog
 	
 	// make pretty pulsating LED
 	if (ticks<=100) {NEXTPWM=ticks;}
@@ -23,7 +26,7 @@ ISR(TIMER1_COMPA_vect){
 	ticks++;
 	if (ticks==200){ticks=0;} // resets every second
 	if (ticks%10==0){NEXTB^=(1<<PB1);} // 20Hz
-	if (ticks%100==0){NEXTB^=(1<<PB3);} // 1Hz 50% duty
+	if (ticks%100==0){NEXTB^=(1<<PB3);PORTD^=(1<<PD6);} // 1Hz 50% duty
 	if (ticks<10){NEXTB|=(1<<PB0);} else {NEXTB&=~(1<<PB0);} // 1Hz blip
 	
 }
@@ -44,10 +47,12 @@ void timer0_setup(){
 }
 	
 int main(void){
+	WDTCSR|=(1<<WDP2)|(1<<WDP1);
 	DDRB|=(1<<PB0);
 	DDRB|=(1<<PB1);
 	DDRB|=(1<<PB2);
 	DDRB|=(1<<PB3);
+	DDRD|=(1<<PD6);
 	timer1_setup(); // 10MHz to 200Hz
 	timer0_setup(); // pwm
 	sei(); // enable global interrupts
