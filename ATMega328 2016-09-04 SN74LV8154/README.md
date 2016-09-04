@@ -3,5 +3,7 @@ The sn74lv8154 is a dual 16-bit counter than can be configured to act as a 32-bi
 
 * Datasheet: http://www.ti.com/lit/ds/symlink/sn74lv8154.pdf
 
+This program measures frequency with the AVR and outputs frequency (counts) to a computer via the serial port. Included is a barebones python script to display these frequency counts.
+
 ![](idea.png)
 ![](ss.png)
