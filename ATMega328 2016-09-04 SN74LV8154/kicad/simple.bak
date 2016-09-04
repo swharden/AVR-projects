@@ -1,0 +1,278 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:texas_counters
+LIBS:simple-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L ATMEGA328P-P IC?
+U 1 1 57CBAB7F
+P 6700 3300
+F 0 "IC?" H 5950 4550 50  0000 L BNN
+F 1 "ATMEGA328P-P" H 7100 1900 50  0000 L BNN
+F 2 "DIL28" H 6700 3300 50  0000 C CIN
+F 3 "" H 6700 3300 50  0000 C CNN
+	1    6700 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L SN74LV8154 U?
+U 1 1 57CBAC24
+P 4200 2400
+F 0 "U?" H 4650 1600 60  0000 C CNN
+F 1 "SN74LV8154" H 4400 2700 60  0000 C CNN
+F 2 "" H 4200 2400 60  0000 C CNN
+F 3 "" H 4200 2400 60  0000 C CNN
+	1    4200 2400
+	1    0    0    -1  
+$EndComp
+Text Label 3800 2400 2    60   ~ 0
+R1
+Text Label 3800 2500 2    60   ~ 0
+R2
+Text Label 3800 2600 2    60   ~ 0
+R3
+Text Label 3800 2700 2    60   ~ 0
+R4
+$Comp
+L GNDREF #PWR?
+U 1 1 57CBAD37
+P 3800 3100
+F 0 "#PWR?" H 3800 2850 50  0001 C CNN
+F 1 "GNDREF" H 3800 2950 50  0001 C CNN
+F 2 "" H 3800 3100 50  0000 C CNN
+F 3 "" H 3800 3100 50  0000 C CNN
+	1    3800 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR?
+U 1 1 57CBADA6
+P 5000 2200
+F 0 "#PWR?" H 5000 2050 50  0001 C CNN
+F 1 "VCC" H 5000 2350 50  0000 C CNN
+F 2 "" H 5000 2200 50  0000 C CNN
+F 3 "" H 5000 2200 50  0000 C CNN
+	1    5000 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L BNC P?
+U 1 1 57CBB19C
+P 3550 2800
+F 0 "P?" H 3560 2920 50  0000 C CNN
+F 1 "GATE" V 3675 2800 50  0000 C CNN
+F 2 "" H 3550 2800 50  0000 C CNN
+F 3 "" H 3550 2800 50  0000 C CNN
+	1    3550 2800
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57CBB1DA
+P 3550 3000
+F 0 "#PWR?" H 3550 2750 50  0001 C CNN
+F 1 "GNDREF" H 3550 2850 50  0001 C CNN
+F 2 "" H 3550 3000 50  0000 C CNN
+F 3 "" H 3550 3000 50  0000 C CNN
+	1    3550 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L BNC P?
+U 1 1 57CBB352
+P 3550 2200
+F 0 "P?" H 3560 2320 50  0000 C CNN
+F 1 "FREQ IN" V 3675 2200 50  0000 C CNN
+F 2 "" H 3550 2200 50  0000 C CNN
+F 3 "" H 3550 2200 50  0000 C CNN
+	1    3550 2200
+	-1   0    0    -1  
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57CBB358
+P 3550 2400
+F 0 "#PWR?" H 3550 2150 50  0001 C CNN
+F 1 "GNDREF" H 3550 2250 50  0001 C CNN
+F 2 "" H 3550 2400 50  0000 C CNN
+F 3 "" H 3550 2400 50  0000 C CNN
+	1    3550 2400
+	1    0    0    -1  
+$EndComp
+Text Label 5000 2300 0    60   ~ 0
+Y0
+Text Label 5000 2400 0    60   ~ 0
+Y1
+Text Label 5000 2500 0    60   ~ 0
+Y2
+Text Label 5000 2600 0    60   ~ 0
+Y3
+Text Label 5000 2700 0    60   ~ 0
+Y4
+Text Label 5000 2800 0    60   ~ 0
+Y5
+Text Label 5000 2900 0    60   ~ 0
+Y6
+Text Label 5000 3000 0    60   ~ 0
+Y7
+$Comp
+L VCC #PWR?
+U 1 1 57CBBB5D
+P 5800 2200
+F 0 "#PWR?" H 5800 2050 50  0001 C CNN
+F 1 "VCC" H 5800 2350 50  0000 C CNN
+F 2 "" H 5800 2200 50  0000 C CNN
+F 3 "" H 5800 2200 50  0000 C CNN
+	1    5800 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57CBBBCE
+P 5800 4500
+F 0 "#PWR?" H 5800 4250 50  0001 C CNN
+F 1 "GNDREF" H 5800 4350 50  0001 C CNN
+F 2 "" H 5800 4500 50  0000 C CNN
+F 3 "" H 5800 4500 50  0000 C CNN
+	1    5800 4500
+	1    0    0    -1  
+$EndComp
+Text Label 7700 4300 0    60   ~ 0
+R1
+Text Label 7700 4400 0    60   ~ 0
+R2
+Text Label 7700 4500 0    60   ~ 0
+R3
+$Comp
+L VCC #PWR?
+U 1 1 57CBC023
+P 5000 3100
+F 0 "#PWR?" H 5000 2950 50  0001 C CNN
+F 1 "VCC" H 5000 3250 50  0000 C CNN
+F 2 "" H 5000 3100 50  0000 C CNN
+F 3 "" H 5000 3100 50  0000 C CNN
+	1    5000 3100
+	0    1    1    0   
+$EndComp
+Text Label 7700 2200 0    60   ~ 0
+R4
+Text Label 7700 3550 0    60   ~ 0
+Y0
+Text Label 7700 3450 0    60   ~ 0
+Y1
+Text Label 7700 3350 0    60   ~ 0
+Y2
+Wire Wire Line
+	3800 2900 3800 3000
+Wire Wire Line
+	3800 2800 3700 2800
+Wire Wire Line
+	3800 2200 3700 2200
+Wire Wire Line
+	3800 2300 3800 2200
+Text Label 7700 3250 0    60   ~ 0
+Y3
+Text Label 7700 3150 0    60   ~ 0
+Y4
+Text Label 7700 3050 0    60   ~ 0
+Y5
+Text Label 7700 2400 0    60   ~ 0
+Y6
+Text Label 7700 2300 0    60   ~ 0
+Y7
+$Comp
+L R R?
+U 1 1 57CBC2EE
+P 8025 3800
+F 0 "R?" V 8105 3800 50  0000 C CNN
+F 1 "47k" V 8025 3800 50  0000 C CNN
+F 2 "" V 7955 3800 50  0000 C CNN
+F 3 "" H 8025 3800 50  0000 C CNN
+	1    8025 3800
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7700 3800 7875 3800
+$Comp
+L LED D?
+U 1 1 57CBC449
+P 8375 3800
+F 0 "D?" H 8375 3900 50  0000 C CNN
+F 1 "LED" H 8375 3700 50  0000 C CNN
+F 2 "" H 8375 3800 50  0000 C CNN
+F 3 "" H 8375 3800 50  0000 C CNN
+	1    8375 3800
+	-1   0    0    1   
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57CBC4CA
+P 8575 3800
+F 0 "#PWR?" H 8575 3550 50  0001 C CNN
+F 1 "GNDREF" H 8575 3650 50  0001 C CNN
+F 2 "" H 8575 3800 50  0000 C CNN
+F 3 "" H 8575 3800 50  0000 C CNN
+	1    8575 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5800 4400 5800 4500
+$Comp
+L Crystal_Small Y?
+U 1 1 57CBCB92
+P 8175 2900
+F 0 "Y?" H 8175 3000 50  0001 C CNN
+F 1 "11.0592 MHz" H 8175 2775 50  0000 C CNN
+F 2 "" H 8175 2900 50  0000 C CNN
+F 3 "" H 8175 2900 50  0000 C CNN
+	1    8175 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7700 2900 8075 2900
+Wire Wire Line
+	8275 2900 8275 2800
+Wire Wire Line
+	8275 2800 7700 2800
+$EndSCHEMATC

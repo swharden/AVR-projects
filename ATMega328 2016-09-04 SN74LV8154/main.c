@@ -1,8 +1,14 @@
+/*
+This program interfacs an ATMega328p with an SN74LV8154N (32-bit counter). 
+No interrupts are being used here. We expect the RCLK pin to handle the gating.
+Output is [count, difference] via serial protocol. 19200 baud, 8-bit, no parity.
+*/
+
 #define F_CPU 11059200ul
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define USART_BAUDRATE 115200
+#define USART_BAUDRATE 19200
 #define UBRR_VALUE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 
 void serial_init(){
@@ -27,25 +33,96 @@ void serial_comma(){
 	serial_send(' '); // space
 }
 
-void serial_number(long val){ // send a number as ASCII text
-	long divby=100000000; // change by dataType
-	while (divby>=1){
+void serial_number(unsigned long int val){ // send a number as ASCII text
+	unsigned long int divby=1000000000; // change by dataType
+	while (divby){
 		serial_send('0'+val/divby);
 		val-=(val/divby)*divby;
 		divby/=10;
 	}
 }
 
+void serial_binary(int val){ // send a number as ASCII text
+	char bitPos;
+	for(bitPos=8;bitPos;bitPos--){
+		if ((val>>(bitPos-1))&1){serial_send('1');}
+		else {serial_send('0');}
+	}
+}
+
+int counter_reg(char reg){
+	// set all registers high
+	PORTD|=(1<<PD5)|(1<<PD6)|(1<<PD7);
+	PORTB|=(1<<PB0);
+	
+	// if 1-4 is given, ground it (send 0 to clear)
+	if (reg==1) {PORTD&=~(1<<PD5);}
+	if (reg==2) {PORTD&=~(1<<PD6);}
+	if (reg==3) {PORTD&=~(1<<PD7);}
+	if (reg==4) {PORTB&=~(1<<PB0);}
+	
+	_delay_ms(1);
+	
+	int val=0;
+	if (PINC&(1<<PC5)){val+=1;}
+	if (PINC&(1<<PC4)){val+=2;}
+	if (PINC&(1<<PC3)){val+=4;}
+	if (PINC&(1<<PC2)){val+=8;}
+	if (PINC&(1<<PC1)){val+=16;}
+	if (PINC&(1<<PC0)){val+=32;}
+	if (PINB&(1<<PB2)){val+=64;}
+	if (PINB&(1<<PB1)){val+=128;}
+	return val;
+}
+
+unsigned long int counter_getCount(){
+	unsigned long int count=0;
+	count+=counter_reg(4);count<<=8;
+	count+=counter_reg(3);count<<=8;
+	count+=counter_reg(2);count<<=8;
+	count+=counter_reg(1);
+	return count;
+}
+
+unsigned long int counter_getCount_safe(){
+	unsigned long int count1=1;
+	unsigned long int count2=2;
+	while (count1!=count2){
+		count1=counter_getCount();
+		count2=counter_getCount();
+	}
+	return count1;
+}
+	
 int main(void){
+	
+	// register selects: PD5,PD6,PD7,PB0
+	DDRD|=(1<<PD5)|(1<<PD6)|(1<<PD7);
+	DDRB|=(1<<PB0);
+	
+	// LED output
+	DDRD|=(1<<PD0);
+	
+	// count reads: PC5,PC4,PC3,PC2,PC1,PC0,PB2,PB1
+	// INPUTS NOT OUTPUTS
+	
 	serial_init();
-	int i;
-	for(;;){
-		for(i='A';i<='Z';i++){serial_send(i);} // send the alphabet
-		serial_break();
-		
-		serial_number(10140000+123); // send a big number
-		serial_break();
-		
-		_delay_ms(1000); // wait a while
+	unsigned long int countOld;
+	unsigned long int countNew;
+	unsigned long int countDiff;
+	for(;;){		
+		countNew=counter_getCount_safe();
+		if (countNew!=countOld){
+			if (countNew>countOld){countDiff=countNew-countOld;}
+			else {countDiff=0-countOld+countNew;}
+			countOld=countNew;
+			serial_number(countNew); // send the raw count
+			serial_comma();
+			serial_number(countDiff); // send the difference
+			serial_break();
+			PORTD|=(1<<PD0); // blink the LED
+		}
+		_delay_ms(50); // wait a while
+		PORTD&=~(1<<PD0);
 	}	
 }
