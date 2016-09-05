@@ -24,6 +24,12 @@ void serial_send(unsigned char data){
 	UDR0 = data; // Transmit data
 }
 
+void serial_string(const char* s){
+    while(*s){
+		serial_send(*s++);
+	}
+}
+
 void serial_break(){
 	serial_send(10); // new line 
 	serial_send(13); // carriage return
@@ -72,6 +78,12 @@ int counter_reg(char reg){
 	if (PINC&(1<<PC0)){val+=32;}
 	if (PINB&(1<<PB2)){val+=64;}
 	if (PINB&(1<<PB1)){val+=128;}
+	
+	
+	// set all registers high
+	PORTD|=(1<<PD5)|(1<<PD6)|(1<<PD7);
+	PORTB|=(1<<PB0);
+	
 	return val;
 }
 
@@ -94,6 +106,15 @@ unsigned long int counter_getCount_safe(){
 	return count1;
 }
 	
+void serial_test(){
+	char i;
+	serial_break();
+	for(i=65;i<65+26;i++){
+		serial_send(i);
+	}
+	serial_break();
+}
+	
 int main(void){
 	
 	// register selects: PD5,PD6,PD7,PB0
@@ -101,18 +122,24 @@ int main(void){
 	DDRB|=(1<<PB0);
 	
 	// LED output
-	DDRD|=(1<<PD0);
+	DDRD|=(1<<PD0); // LED1
+	DDRD|=(1<<PD4); // LED2
 	
 	// count reads: PC5,PC4,PC3,PC2,PC1,PC0,PB2,PB1
 	// INPUTS NOT OUTPUTS
 	
 	serial_init();
+	serial_string("Frequency Counter");
+	serial_break();
+	serial_string("www.SWHarden.com");
+	serial_break();
 	unsigned long int countOld;
 	unsigned long int countNew;
 	unsigned long int countDiff;
+	char blankReads=0;
 	for(;;){		
 		countNew=counter_getCount_safe();
-		if (countNew!=countOld){
+		if ((countNew!=countOld)||(blankReads>50)){
 			if (countNew>countOld){countDiff=countNew-countOld;}
 			else {countDiff=0-countOld+countNew;}
 			countOld=countNew;
@@ -120,9 +147,16 @@ int main(void){
 			serial_comma();
 			serial_number(countDiff); // send the difference
 			serial_break();
-			PORTD|=(1<<PD0); // blink the LED
+			PORTD|=(1<<PD0); // blink LED1 on all TX
+			if (blankReads<50){
+				PORTD|=(1<<PD4); // blink LED2 if gated
+			}
+			blankReads=0;
 		}
-		_delay_ms(50); // wait a while
+		blankReads++;
+		_delay_ms(100); // wait a while
 		PORTD&=~(1<<PD0);
+		PORTD&=~(1<<PD4);
+		//serial_test();
 	}	
 }
