@@ -1,0 +1,183 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MMBT3904 Q?
+U 1 1 57D200FC
+P 5000 2725
+F 0 "Q?" H 5200 2800 50  0001 L CNN
+F 1 "NPN" H 5200 2725 50  0000 L CNN
+F 2 "SOT-23" H 5200 2650 50  0001 L CIN
+F 3 "" H 5000 2725 50  0000 L CNN
+	1    5000 2725
+	-1   0    0    -1  
+$EndComp
+$Comp
+L MMBT3906 Q?
+U 1 1 57D20129
+P 4800 2025
+F 0 "Q?" H 5000 2100 50  0001 L CNN
+F 1 "PNP" H 5000 2025 50  0000 L CNN
+F 2 "SOT-23" H 5000 1950 50  0001 L CIN
+F 3 "" H 4800 2025 50  0000 L CNN
+	1    4800 2025
+	1    0    0    1   
+$EndComp
+$Comp
+L C C?
+U 1 1 57D20268
+P 4700 2375
+F 0 "C?" H 4725 2475 50  0001 L CNN
+F 1 "22u" H 4550 2475 50  0000 L CNN
+F 2 "" H 4738 2225 50  0000 C CNN
+F 3 "" H 4700 2375 50  0000 C CNN
+	1    4700 2375
+	1    0    0    -1  
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57D20325
+P 4425 2325
+F 0 "#PWR?" H 4425 2075 50  0001 C CNN
+F 1 "GNDREF" H 4425 2175 50  0001 C CNN
+F 2 "" H 4425 2325 50  0000 C CNN
+F 3 "" H 4425 2325 50  0000 C CNN
+	1    4425 2325
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57D2057D
+P 4425 1875
+F 0 "R?" V 4505 1875 50  0001 C CNN
+F 1 "1k" V 4425 1875 50  0000 C CNN
+F 2 "" V 4355 1875 50  0000 C CNN
+F 3 "" H 4425 1875 50  0000 C CNN
+	1    4425 1875
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR?
+U 1 1 57D205BB
+P 4425 1725
+F 0 "#PWR?" H 4425 1575 50  0001 C CNN
+F 1 "VCC" H 4425 1875 50  0000 C CNN
+F 2 "" H 4425 1725 50  0000 C CNN
+F 3 "" H 4425 1725 50  0000 C CNN
+	1    4425 1725
+	1    0    0    -1  
+$EndComp
+$Comp
+L VCC #PWR?
+U 1 1 57D206A9
+P 4900 1525
+F 0 "#PWR?" H 4900 1375 50  0001 C CNN
+F 1 "VCC" H 4900 1675 50  0000 C CNN
+F 2 "" H 4900 1525 50  0000 C CNN
+F 3 "" H 4900 1525 50  0000 C CNN
+	1    4900 1525
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57D206D3
+P 4425 2175
+F 0 "R?" V 4505 2175 50  0001 C CNN
+F 1 "1k" V 4425 2175 50  0000 C CNN
+F 2 "" V 4355 2175 50  0000 C CNN
+F 3 "" H 4425 2175 50  0000 C CNN
+	1    4425 2175
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 2225 4900 2525
+Wire Wire Line
+	4425 2025 4600 2025
+$Comp
+L R R?
+U 1 1 57D206E5
+P 4900 1675
+F 0 "R?" V 4980 1675 50  0001 C CNN
+F 1 "1k" V 4900 1675 50  0000 C CNN
+F 2 "" V 4830 1675 50  0000 C CNN
+F 3 "" H 4900 1675 50  0000 C CNN
+	1    4900 1675
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 57D206FA
+P 5350 2725
+F 0 "R?" V 5430 2725 50  0001 C CNN
+F 1 "1k" V 5350 2725 50  0000 C CNN
+F 2 "" V 5280 2725 50  0000 C CNN
+F 3 "" H 5350 2725 50  0000 C CNN
+	1    5350 2725
+	0    1    1    0   
+$EndComp
+$Comp
+L GNDREF #PWR?
+U 1 1 57D20715
+P 4900 2925
+F 0 "#PWR?" H 4900 2675 50  0001 C CNN
+F 1 "GNDREF" H 4900 2775 50  0001 C CNN
+F 2 "" H 4900 2925 50  0000 C CNN
+F 3 "" H 4900 2925 50  0000 C CNN
+	1    4900 2925
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 2225 4700 2225
+$Comp
+L GNDREF #PWR?
+U 1 1 57D2072E
+P 4700 2525
+F 0 "#PWR?" H 4700 2275 50  0001 C CNN
+F 1 "GNDREF" H 4700 2375 50  0001 C CNN
+F 2 "" H 4700 2525 50  0000 C CNN
+F 3 "" H 4700 2525 50  0000 C CNN
+	1    4700 2525
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
