@@ -146,6 +146,8 @@ int main(void){
 			serial_number(countNew); // send the raw count
 			serial_comma();
 			serial_number(countDiff); // send the difference
+			//serial_comma();
+			//serial_number(countDiff*10); // EXPERIMENTAL
 			serial_break();
 			PORTD|=(1<<PD0); // blink LED1 on all TX
 			if (blankReads<50){
