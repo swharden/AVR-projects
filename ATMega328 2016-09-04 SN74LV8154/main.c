@@ -8,7 +8,7 @@ Output is [count, difference] via serial protocol. 19200 baud, 8-bit, no parity.
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define USART_BAUDRATE 19200
+#define USART_BAUDRATE 9600
 #define UBRR_VALUE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 
 void serial_init(){
@@ -114,7 +114,7 @@ void serial_test(){
 	}
 	serial_break();
 }
-	
+
 int main(void){
 	
 	// register selects: PD5,PD6,PD7,PB0
@@ -129,10 +129,11 @@ int main(void){
 	// INPUTS NOT OUTPUTS
 	
 	serial_init();
-	serial_string("Frequency Counter");
-	serial_break();
-	serial_string("www.SWHarden.com");
-	serial_break();
+	//serial_string("Frequency Counter");
+	//serial_break();
+	//serial_string("www.SWHarden.com");
+	//serial_break();
+	
 	unsigned long int countOld;
 	unsigned long int countNew;
 	unsigned long int countDiff;
@@ -143,12 +144,15 @@ int main(void){
 			if (countNew>countOld){countDiff=countNew-countOld;}
 			else {countDiff=0-countOld+countNew;}
 			countOld=countNew;
-			serial_number(countNew); // send the raw count
-			serial_comma();
+			if (countDiff==0) {continue;}
+			serial_string("F=");
+			//serial_number(countNew); // send the raw count
+			//serial_comma();
 			serial_number(countDiff); // send the difference
 			//serial_comma();
 			//serial_number(countDiff*10); // EXPERIMENTAL
 			serial_break();
+			
 			PORTD|=(1<<PD0); // blink LED1 on all TX
 			if (blankReads<50){
 				PORTD|=(1<<PD4); // blink LED2 if gated
@@ -156,7 +160,7 @@ int main(void){
 			blankReads=0;
 		}
 		blankReads++;
-		_delay_ms(100); // wait a while
+		_delay_ms(1); // wait a while
 		PORTD&=~(1<<PD0);
 		PORTD&=~(1<<PD4);
 		//serial_test();
