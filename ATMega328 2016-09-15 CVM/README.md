@@ -5,6 +5,7 @@ This code uses an ATMega328 to sample the multiplexed display of a cheap eBay cu
 * http://www.swharden.com/wp/2016-09-19-hacking-a-cheap-…oth-pc-interface/
 
 ## Notes:
+![](analysis/demo.png)
 ![](http://www.swharden.com/wp/wp-content/uploads/2016/09/IMG_8517-1024x768.jpg)
 ![](http://www.swharden.com/wp/wp-content/uploads/2016/09/IMG_8594-1.jpg)
 ![](http://www.swharden.com/wp/wp-content/uploads/2016/09/IMG_8590-1024x768.jpg)
