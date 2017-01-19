@@ -7,12 +7,6 @@ Output is on PB4 (pin 3).
 #include <avr/io.h>
 #include <util/delay.h>
 
-void wait(){
-	_delay_ms(1000);
-	_delay_ms(1000);
-	_delay_ms(1000);
-}
-
 void setupPWM(){
 	// Enable PLL (64 MHz)
 	PLLCSR |= (1 << PLLE);
