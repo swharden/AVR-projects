@@ -42,3 +42,10 @@ PORTD^=(1<<PD6); // flips the state of PD6
 ![](resources/ATTiny2313.png)
 
 ![](resources/ATTiny45.png)
+
+## Misc Code
+
+### Reading Pins
+```C
+if(PIND&(1<<PD7)){doSomething();} // runs doSomething() if PD7 is HIGH
+```
