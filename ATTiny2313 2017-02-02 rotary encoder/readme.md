@@ -1,0 +1,2 @@
+# rotary encoder
+Barebones code to get up and running with a rotary encoder (outputting graycode) to a microcontroller. Although this is written for an ATTiny2313 AVR, it could work with any ATMEL AVR, Arduino, Pic, etc.
