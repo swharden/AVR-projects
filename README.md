@@ -1,6 +1,14 @@
 # AVR-projects
 This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I usually have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, etc)
 
+# Quick Links
+- Blink an LED with an [ATTiny45](ATMega328  LEDblink), [ATTiny2313](ATTiny2313  LEDblink), or [ATMega328](ATMega328  LEDblink)
+ - Each folder also has batch scripts to set fuses to change the clock source (internal RC oscillator at 8MHz, div/8 for 1MHz, or external crystal typically up to 20 MHz)
+- [Sending data to a PC with USART via a USB serial port](ATMega328%202016-09-03%20USART) or [over bluetooth](ATMega328%202016-09-15%20CVM)
+- [PWM for ATTiny2313](ATTiny2313%202017-02-01%20PWM) or [PWM for ATTiny85](ATTiny85%202016-12-30%20PWM)
+- [rotary encoder code](ATTiny2313%202017-02-02%20rotary%20encoder)
+- ultra minimal [frequency generator](ATTiny85%202016-07-31%20frequency%20generator) I use for all sorts of stuff
+
 # Programming Setup
 I almost always use AVRISPmkII and AVRdude. I virtually never use AVRStudio.
 
