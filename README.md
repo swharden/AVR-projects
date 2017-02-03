@@ -1,14 +1,14 @@
 # AVR-projects
 This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I usually have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, etc)
 
-# Helpful Links
-* [AVR fuse calculator] (http://www.engbedded.com/fusecalc)
-* [AVR timer calculator] (http://eleccelerator.com/avr-timer-calculator/)
-
-# Programming 
+# Programming / Setup
 I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definately check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.
 
-![avrdudess](resources/AVRDudess.jpg)
+tip|demo
+---|---
+AVRDudess can simplify programming of code and fuses | ![avrdudess](resources/AVRDudess.jpg)
+AVRISPmkII is a ceap, fast, and convenient AVR programmer | ![AVRISPmkII](ATTiny2313 2016-08-14 clock divider/demo.jpg)
+Bus Pirate _technically_ can program AVRs, but it's so slow it's not practical. [Here's a post](http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python) I wrote about it. | ![](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
 
 ## Software
 * Just install [WinAVR] (https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
@@ -19,13 +19,6 @@ I like the bus pirate when I need to use software to measure voltages and toggle
 * windows 10 driver for USBTiny is [here] (https://learn.adafruit.com/usbtinyisp/drivers)
 * actually I only got it to work after installing [Zadig] (http://zadig.akeo.ie/)
 
-![demo](ATTiny2313%202016-08-14%20%20clock%20divider/demo.jpg)
-
-## Bus Pirate
-* [Controlling bus pirate with python] (http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python/)
-
-![demo](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
-
 ## Common AVR Datasheets and Pinouts
 
 chip|pinout|datasheets
@@ -33,6 +26,10 @@ chip|pinout|datasheets
 ATMega328|![](resources/ATMega328.png)|[[summary](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Summary.pdf)] [[complete](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf)]
 ATMega2313|![](resources/ATTiny2313.png)|[[summary](http://www.atmel.com/Images/8246S.pdf)] [[complete](http://www.atmel.com/Images/doc8246.pdf)]|![](resources/ATMega328.png)
 ATTiny45|![](resources/ATTiny45.png)|[[summary](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet-Summary.pdf)] [[complete](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf)]|![](resources/ATMega328.png)
+
+# Helpful Links
+* [AVR fuse calculator] (http://www.engbedded.com/fusecalc)
+* [AVR timer calculator] (http://eleccelerator.com/avr-timer-calculator/)
 
 ## Misc Code
 
