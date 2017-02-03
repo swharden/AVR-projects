@@ -4,11 +4,11 @@ This repository contains a growing collection of individual AVR project files fo
 # Programming / Setup
 I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definately check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.
 
-tip|demo
+Note|Picture
 ---|---
-AVRDudess can simplify programming of code and fuses | ![avrdudess](resources/AVRDudess.jpg)
 AVRISPmkII is a ceap, fast, and convenient AVR programmer | ![AVRISPmkII](ATTiny2313 2016-08-14 clock divider/demo.jpg)
 Bus Pirate _technically_ can program AVRs, but it's so slow it's not practical. [Here's a post](http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python) I wrote about it. | ![](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
+AVRDudess can simplify programming of code and fuses | ![avrdudess](resources/AVRDudess.jpg)
 
 ## Software
 * Just install [WinAVR] (https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
