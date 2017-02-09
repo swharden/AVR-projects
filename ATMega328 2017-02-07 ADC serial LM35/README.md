@@ -46,6 +46,8 @@ void ADC_read_quiet(){
 ```
 
 ## Notes
+- **always stick a capacitor to ground on the Vref pin** (0.1 uF is fine)
 - I had a _extremely_ volatile ADC readings no matter what I did. I added filter caps out the wazoo and it never improved! I finally realized it was because my power supply ground was not grounded to my PC ground. I think my USB hub's ground was floating too. All those various floating grounds were causing wonky signals. Once well-grounded (with a quieter, linear power supply too), it improved immedaitely.
 - I record data using RealTerm (it has a capture option) and can quickly plot it in Excel
 - don't forget the resistor to ground on the LM35, or a series resistor between the output pin and the MCU for stable recordings
+- These methods would work just as well to measure temperature with a LM335 or thermistor in a voltage divider configuration, but would requrie using the Vref pin for the voltage reference. To do this, comment-out the `REFS1` and `REFS0` bits. **If you do this, wire Vref to VCC!**
