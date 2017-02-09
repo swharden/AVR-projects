@@ -7,7 +7,7 @@ This repository contains a growing collection of individual AVR project files fo
 - [send data from ATTiny2313 to a PC using USART](ATTiny2313%202017-02-05%20serial%20USART)
 - [Sending data from ATMega328 to a PC with USART via a USB serial port](ATMega328%202016-09-03%20serial%20USART) or [over bluetooth](ATMega328%202016-09-15%20CVM)
 - [PWM for ATTiny2313](ATTiny2313%202017-02-01%20PWM) or [PWM for ATTiny85](ATTiny85%202016-12-30%20PWM)
-- [rotary encoder code](ATTiny2313%202017-02-02%20rotary%20encoder)
+- code to [interface with a rotary encoder](ATTiny2313%202017-02-02%20rotary%20encoder) (ATTiny2313)
 - ultra minimal [frequency generator](ATTiny85%202016-07-31%20frequency%20generator) I use for all sorts of stuff
 - code to [read ADC values and send them over serial](ATMega328%202017-02-07%20ADC%20serial%20LM35) with ATMega328 (including code for ADC noise reduction mode)
 
