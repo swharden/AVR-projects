@@ -1,5 +1,5 @@
 # AVR-projects
-This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I usually have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, etc)
+This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I would otherwise have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, ADC, etc)
 
 # Quick Links
 - Blink an LED with an [ATTiny45](ATMega328  LEDblink), [ATTiny2313](ATTiny2313  LEDblink), or [ATMega328](ATMega328  LEDblink)
