@@ -36,11 +36,11 @@ void init_ADC(){
 **Making a measurement**
 ```C
 int ADC_read_quiet(){
-	  // enter sleep mode, make an ADC read, wake up, and return the read.
+    // enter sleep mode, make an ADC read, wake up, and return the read.
     set_sleep_mode(SLEEP_MODE_ADC); // set sleep mode to this
     sleep_enable(); // enable sleep
     sleep_mode(); // run the sleep mode (this starts an ADC read like ADCSRA |= (1<<ADSC) does)
-	  // ...when conversion is complete, ADC_vect is called, then we wake up and continue...
+    // ...when conversion is complete, ADC_vect is called, then we wake up and continue...
     sleep_disable(); // disable sleep
 }
 ```
