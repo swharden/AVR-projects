@@ -27,8 +27,9 @@ void serial_comma(){
 	serial_send(' '); // space
 }
 
-void serial_number(long val, char preVal=' '){ 
+void serial_number(long val){ 
 	// send a number as ASCII text
+	char preVal=' ';
 	long divby=100000000; // change by dataType
 	while (divby>=1){
 		serial_send('0'+val/divby);

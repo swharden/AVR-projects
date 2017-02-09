@@ -1,0 +1,1 @@
+read LM35 voltage and output ADC reading via serial port
