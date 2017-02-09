@@ -15,13 +15,11 @@ This repository contains a growing collection of individual AVR project files fo
 I almost always use AVRISPmkII and AVRdude (launched from a batch script) to program my chips. I virtually never use AVRStudio. I typically develop in a Windows environment, but the code (and AVRdude) works the same in Linux.
 
 ### Software
->
 * Just install [WinAVR] (https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
 * I prefer to edit C code in [Notepad++](https://notepad-plus-plus.org/)
 * definately check out [AVRDudess] (http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/) (a GUI for AVRdude) as an easy GUI to load flash onto chips
 
 ### Hardware
->
 * [AVR Programming in 64-bit Windows 7] (http://www.swharden.com/wp/2013-05-07-avr-programming-in-64-bit-windows-7/) (should also work for windows 10)
 * windows 10 driver for USBTiny is [here] (https://learn.adafruit.com/usbtinyisp/drivers)
 * actually I only got it to work after installing [Zadig] (http://zadig.akeo.ie/)
