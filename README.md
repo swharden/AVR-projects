@@ -1,10 +1,9 @@
 # AVR-projects
-This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I would otherwise have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, ADC, etc). 
+This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I would otherwise have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, ADC, etc). Each folder is self-contained and has batch scripts to set fuses to change the clock source (internal RC oscillator at 8MHz, div/8 for 1MHz, or external crystal typically up to 20 MHz)
 
 **These are some of my favorites:**
 > 
 - Blink an LED with an [ATTiny45](ATMega328  LEDblink), [ATTiny2313](ATTiny2313  LEDblink), or [ATMega328](ATMega328  LEDblink)
- - Each folder also has batch scripts to set fuses to change the clock source (internal RC oscillator at 8MHz, div/8 for 1MHz, or external crystal typically up to 20 MHz)
 - [send data from ATTiny2313 to a PC using USART](ATTiny2313%202017-02-05%20serial%20USART)
 - [Sending data from ATMega328 to a PC with USART via a USB serial port](ATMega328%202016-09-03%20serial%20USART) or [over bluetooth](ATMega328%202016-09-15%20CVM)
 - [PWM for ATTiny2313](ATTiny2313%202017-02-01%20PWM) or [PWM for ATTiny85](ATTiny85%202016-12-30%20PWM)
