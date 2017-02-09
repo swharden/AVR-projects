@@ -35,7 +35,7 @@ void init_ADC(){
 
 **Making a measurement**
 ```C
-int ADC_read_quiet(){
+void ADC_read_quiet(){
     // enter sleep mode, make an ADC read, wake up, and return the read.
     set_sleep_mode(SLEEP_MODE_ADC); // set sleep mode to this
     sleep_enable(); // enable sleep
