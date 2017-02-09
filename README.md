@@ -10,6 +10,7 @@ This repository contains a growing collection of individual AVR project files fo
 - [rotary encoder code](ATTiny2313%202017-02-02%20rotary%20encoder)
 - ultra minimal [frequency generator](ATTiny85%202016-07-31%20frequency%20generator) I use for all sorts of stuff
 - code to [read ADC values and send them over serial](ATMega328%202017-02-07%20ADC%20serial%20LM35) with ATMega328 (including code for ADC noise reduction mode)
+- [send data from ATTiny2313 to a PC using USART](ATTiny2313%202017-02-05%20serial%20USART)
 
 # Programming Setup
 I almost always use AVRISPmkII and AVRdude (launched from a batch script) to program my chips. I virtually never use AVRStudio. I typically develop in a Windows environment, but the code (and AVRdude) works the same in Linux.
