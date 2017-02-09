@@ -6,7 +6,7 @@ Simple-case example how to get the AVR to send some data to a PC (in my case, vi
 #define USART_BAUDRATE 4800
 #define UBRR_VALUE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 ```
-###Initializing USART
+###Initializing USART (TX only)
 ```C
 void serial_init(){
 	// initialize USART
@@ -17,7 +17,7 @@ void serial_init(){
 }
 ```
 
-###Sending Data:
+###Sending Data
 ```C
 void serial_send(unsigned char data){
 	// send a single character via USART
