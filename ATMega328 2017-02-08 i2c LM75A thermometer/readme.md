@@ -1,5 +1,5 @@
 # read LM75A I2C temperature sensor with ATMega328
-This was less trivial than I initially though it would be, but the final result is really clean. Just look at the contents of [main.c](main.c) to see how it works. Importantly, look at the build script (see how it includes i2c_master.c).
+This was less trivial than I initially though it would be, but the final result is really clean. Just look at the contents of [main.c](main.c) to see how it works. Importantly, look at the build script (see how it includes i2c_master.c). | 
 
 ### Relevant Code
 ```C
@@ -26,5 +26,10 @@ i2c_master.c:134: error: 'for' loop initial declaration used outside C99 mode
 avr-objcopy: 'main.elf': No such file
 ```
 
+## Output
+![](demo.png)
+![](circuit.jpg)
+
 ## Notes
 - I tested this with my MCU running at 1MHz. It worked fine, so I didn't look closer at how to change the i2c speed.
+- ![](circuit2.jpg)
