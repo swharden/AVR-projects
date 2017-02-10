@@ -2,6 +2,7 @@
 This was less trivial than I initially though it would be, but the final result is really clean. Just look at the contents of [main.c](main.c) to see how it works. Importantly, look at the build script (see how it includes i2c_master.c). | 
 
 ### Relevant Code
+_note that I'm using the [g4lvanix I2C-master-lib](https://github.com/g4lvanix/I2C-master-lib) which is copied into this project_
 ```C
 uint8_t data[2]; // prepare variable to hold sensor data
 uint8_t address=0x91; // this is the i2c address of the sensor
