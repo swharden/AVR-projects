@@ -6,12 +6,10 @@ I typically use an FT232 breakboard board to capture serial data from my microco
 On the software side, I typically use [RealTerm](https://realterm.sourceforge.io/). It's simple, easy, and allows file logging. If you configure your microcontroller to output CSV format, you can save directly as CSV so files can be opened in Excel. Nice!|![](../ATMega328%202017-02-08%20i2c%20LM75A%20thermometer/demo.png)
 
 ## TX only
-This example sends data one way (AVR -> PC)|![](tx%20only/demo.jpg)
----|---
+**[This example](tx%20rx%20interrupt/main.c) shows how to send data one way (AVR -> PC)**
 
 ## TX + RX (polling method)
+**[This example]('tx%20rx%20polling/main.c') shows how bidirectionally exchange data (AVR <-> PC) using a polling method.** This is typically less favorable than the interrupt method because the processing of the chip gets to a point where it waits (perhaps forever) until the PC sends data.
 
 ## TX + RX (polling interrupt method)
-This example sends data two ways (AVR <-> PC) using an interrupt method. This is usually the best way of doing this.|![]('tx%20rx%20interrupt/demo.png')
----|---
-
+**[This example]('tx%20rx%20interrupt/main.c') shows how bidirectionally exchange data (AVR <-> PC) using an interrupt method.** This is typically the best method because the MCU can run continuously doing its own thing, and the PC _interrupts_ the microcontroller when USART data begins to come in.
