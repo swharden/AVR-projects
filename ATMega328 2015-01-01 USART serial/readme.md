@@ -1,13 +1,32 @@
 # USART (serial) communication with ATMega328
 
 ### TX only
-**[This example](tx%20rx%20interrupt/main.c) shows how to send data one way (AVR -> PC)**
+**[This example](tx%20only/main.c) shows how to send data one way (AVR -> PC)**
+```C
+void serial_send(unsigned char data){
+	// send a single character via USART
+	while(!(UCSR0A&(1<<UDRE0))){}; //wait while previous byte is completed
+	UDR0 = data; // Transmit data
+}
+```
 
 ### TX + RX (polling method)
 **[This example](tx%20rx%20polling/main.c) shows how bidirectionally exchange data (AVR <-> PC) using a polling method.** This is typically less favorable than the interrupt method because the processing of the chip gets to a point where it waits (perhaps forever) until the PC sends data.
+```C
+char serial_read()
+{
+   // wait until single character is read via USART
+   while(!(UCSR0A & (1<<RXC0))){} // wait until data comes
+   return UDR0; // return the character
+}
+```
 
 ### TX + RX (polling interrupt method)
 **[This example](tx%20rx%20interrupt/main.c) shows how bidirectionally exchange data (AVR <-> PC) using an interrupt method.** This is typically the best method because the MCU can run continuously doing its own thing, and the PC _interrupts_ the microcontroller when USART data begins to come in.
+```C
+volatile char lastLetter;
+ISR(USART_RX_vect){lastLetter=UDR0;} // this runs when we capture
+```
 
 ## Hardware
 description | picture
