@@ -24,10 +24,10 @@ char serial_read()
 ### TX + RX (polling interrupt method)
 **[This example](tx%20rx%20interrupt/main.c) shows how bidirectionally exchange data (AVR <-> PC) using an interrupt method.** This is typically the best method because the MCU can run continuously doing its own thing, and the PC _interrupts_ the microcontroller when USART data begins to come in.
 ```C
-volatile char lastLetter;
+volatile char lastLetter; // make a variable that can be accessed
 ISR(USART_RX_vect){
-    lastLetter=UDR0;
-} // this runs when we capture
+    lastLetter=UDR0;  // quickly do something with this before it changes
+}
 ```
 
 ## Hardware
