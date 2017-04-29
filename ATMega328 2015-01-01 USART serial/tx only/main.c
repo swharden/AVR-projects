@@ -2,7 +2,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define USART_BAUDRATE 2400
+#define USART_BAUDRATE 4800
 #define UBRR_VALUE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 
 void serial_init(){

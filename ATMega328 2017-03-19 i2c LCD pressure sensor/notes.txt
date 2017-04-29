@@ -1,0 +1,4 @@
+with bus pirate, I can get pressure with:
+[0xEE 72]
+[0xEE 0]
+[0xEF r:3]
