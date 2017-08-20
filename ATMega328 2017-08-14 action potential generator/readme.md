@@ -1,0 +1,2 @@
+# Analog Action Potential Generator
+This project creates action-potential-like waveforms entirely in software. See the project page: https://www.swharden.com/wp/2017-08-20-microcontroller-action-potential-generator
