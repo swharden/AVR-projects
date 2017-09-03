@@ -14,8 +14,9 @@ temperature=(data[0]*256+data[1])/32; // convert two bytes to temperature
 ```bash
 avr-gcc -mmcu=atmega328p -Wall -Os -o main.elf main.c i2c_master.c -w -std=c99
 ```
+
 If I don't include the `-std=c99` then the following error is thrown:
-> ```
+```
 i2c_master.c: In function 'i2c_transmit':
 i2c_master.c:85: error: 'for' loop initial declaration used outside C99 mode
 i2c_master.c: In function 'i2c_receive':
