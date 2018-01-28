@@ -3,7 +3,7 @@ This repository contains a growing collection of individual AVR project files fo
 
 **These are some of my favorites:**
 > 
-- Blink an LED with an [ATTiny45](ATMega328  LEDblink), [ATTiny2313](ATTiny2313  LEDblink), or [ATMega328](ATMega328  LEDblink)
+- Blink an LED with an [ATTiny45](/ATMega328%20%20LEDblink), [ATTiny2313](ATTiny2313%20%20LEDblink), or [ATMega328](ATMega328%20%20LEDblink)
 - sending data from a microcontroller to a PC with USART (likely via USB serial port)
  - [USART for ATTiny2313](ATTiny2313%202017-02-05%20serial%20USART)
  - [ATMega328 wired](ATMega328%202015-01-01%20USART%20serial) or [over bluetooth](ATMega328%202016-09-15%20CVM)
