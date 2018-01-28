@@ -17,19 +17,19 @@ This repository contains a growing collection of individual AVR project files fo
 I almost always use AVRISPmkII and AVRdude (launched from a batch script) to program my chips. I virtually never use AVRStudio. I typically develop in a Windows environment, but the code (and AVRdude) works the same in Linux.
 
 ### Software
-* Just install [WinAVR] (https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
+* Just install [WinAVR](https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
 * I prefer to edit C code in [Notepad++](https://notepad-plus-plus.org/)
-* definately check out [AVRDudess] (http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/) (a GUI for AVRdude) as an easy GUI to load flash onto chips
+* definately check out [AVRDudess](http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/) (a GUI for AVRdude) as an easy GUI to load flash onto chips
 
 ### Hardware
-* [AVR Programming in 64-bit Windows 7] (http://www.swharden.com/wp/2013-05-07-avr-programming-in-64-bit-windows-7/) (should also work for windows 10)
-* windows 10 driver for USBTiny is [here] (https://learn.adafruit.com/usbtinyisp/drivers)
-* actually I only got it to work after installing [Zadig] (http://zadig.akeo.ie/)
+* [AVR Programming in 64-bit Windows 7](http://www.swharden.com/wp/2013-05-07-avr-programming-in-64-bit-windows-7/) (should also work for windows 10)
+* windows 10 driver for USBTiny is [here](https://learn.adafruit.com/usbtinyisp/drivers)
+* actually I only got it to work after installing [Zadig](http://zadig.akeo.ie/)
 
 ### Programmers
 Note|Picture
 ---|---
-AVRISPmkII is a ceap, fast, and convenient AVR programmer. | ![AVRISPmkII](ATTiny2313 2016-08-14 clock divider/demo.jpg)
+AVRISPmkII is a ceap, fast, and convenient AVR programmer. | ![AVRISPmkII](/ATTiny2313%202016-08-14%20clock%20divider/demo.jpg)
 Bus Pirate _technically_ can program AVRs, but it's so slow it's not practical. [Here's a post](http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python) I wrote about it. I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definately check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.| ![](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
 AVRDudess can simplify programming of code and fuses. | ![avrdudess](resources/AVRDudess.jpg)
 
@@ -44,8 +44,8 @@ chip|pinout|datasheets
 **ATTiny45**|<img width="300" src="resources/ATTiny45.png">|[[summary](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet-Summary.pdf)] [[complete](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf)]|<img width="300" src="resources/ATMega328.png)
 
 # Helpful Links
-* [AVR fuse calculator] (http://www.engbedded.com/fusecalc)
-* [AVR timer calculator] (http://eleccelerator.com/avr-timer-calculator/)
+* [AVR fuse calculator](http://www.engbedded.com/fusecalc)
+* [AVR timer calculator](http://eleccelerator.com/avr-timer-calculator/)
 
 ## Misc Code
 
