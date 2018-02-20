@@ -24,7 +24,6 @@ void setupPWM_16bit(){
 }
 
 int main(void){
-	DDRD|=(1<<PD6); // set PD6 (pin 11) output
 	setupPWM_16bit();
 	for(;;){
 		_delay_ms(500);
