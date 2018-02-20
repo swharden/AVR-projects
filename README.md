@@ -40,7 +40,7 @@ AVRDudess can simplify programming of code and fuses. | ![avrdudess](resources/A
 chip|pinout|datasheets
 ---|---|---
 **ATMega328**|<img width="300" src="resources/ATMega328.png">|[[summary](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Summary.pdf)] [[complete](http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf)]
-**ATMega2313**|<img width="300" src="resources/ATTiny2313.png">|[[summary](http://www.atmel.com/Images/8246S.pdf)] [[complete](http://www.atmel.com/Images/doc8246.pdf)]|<img width="300" src="resources/ATMega328.png">
+**ATTiny2313**|<img width="300" src="resources/ATTiny2313.png">|[[summary](http://www.atmel.com/Images/8246S.pdf)] [[complete](http://www.atmel.com/Images/doc8246.pdf)]|<img width="300" src="resources/ATMega328.png">
 **ATTiny45**|<img width="300" src="resources/ATTiny45.png">|[[summary](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet-Summary.pdf)] [[complete](http://www.atmel.com/Images/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf)]|<img width="300" src="resources/ATMega328.png)
 
 # Helpful Links
