@@ -3,7 +3,7 @@ Copy-pastable code blocks I often find useful
 
 ## Global Variables
 They must be volatile if they are to be changed from anywhere in the code.
-```
+```C
 volatile int intensity=123;
 ```
 
