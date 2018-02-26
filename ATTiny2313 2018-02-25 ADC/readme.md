@@ -1,6 +1,6 @@
-# ADC on ATTiny2313
+# 16-bit Timer on ATTiny2313
 
-## 16-bit ADC output on PB3
+## 16-bit PWM output on PB3
 ```C
 void Setup16BitTimer(){
 	// set up the timer to produce 100 Hz, 200 us pulses (when OCR1A = 500) with an 8 MHz clock
