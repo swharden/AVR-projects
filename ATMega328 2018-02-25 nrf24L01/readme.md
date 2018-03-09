@@ -16,7 +16,7 @@ MISO | PD4
 This project uses 2 microcontrollers (TX and RX). A 3-byte code is sent and controls the on/off state of 3 LEDs (red, green, blue) on the RX. The TX knows if the RX received the message and lights-up a green or red LED to indicate this.
 
 * [transmitter code](src/main_tx.c)
-* [receiver code](src/main_tx.c)
+* [receiver code](src/main_rx.c)
 
 ## Links
 * https://github.com/kehribar/nrf24L01_plus
