@@ -60,3 +60,11 @@ PORTD|=(1<<PD6); // sets PD6 high
 PORTD&=~(1<<PD6); // sets PD6 low
 PORTD^=(1<<PD6); // flips the state of PD6
 ```
+
+### Memory-Efficient Timers
+```C
+#include <util/delay.h>
+void waitMs1(){_delay_ms(1);}
+void waitMs(int ms){while (ms-->0){waitMs1();}}
+void waitSec(int sec){while (sec-->0){waitMs(1000);}}
+```
