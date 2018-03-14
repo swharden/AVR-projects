@@ -21,14 +21,23 @@ int main()
 }
 ```
 
-## Overflow Interrupt
+## Interrupts
 
 ```C
-// this is close, but I think it interrupts too often
 
 ISR(TIMER1_COMPA_vect){
+    // Timer/Counter1 Compare Match for when: TIMSK1|=(1<<OCIE1A)
+    // this does not produce 50% duy
+    //DDRB|=(1<<PB0); // ensure outupt
+    //PORTB^=(1<<PB0); // flip its state
+}
+
+
+ISR(TIMER1_OVF_vect){
+    // Timer/Counter1 Overflow for when: TIMSK1|=(1<<TOIE1)
+    // this produces 50% duty
     DDRB|=(1<<PB0); // ensure outupt
-    PORTB^=(1<<PB0); // flip state of PB0
+    PORTB^=(1<<PB0); // flip its state
 }
 
 void SetupPWM(){
@@ -39,13 +48,19 @@ void SetupPWM(){
 	TCCR1B|=(1<<CS10); // enable output, fastest clock (no prescaling)
 	ICR1=40000; // set the top value (up to 2^16)
 	OCR1A=0; // set PWM pulse width (duty)
-	TIMSK1|=(1<<OCIE1A); // timer A compare match interrupt
+	//TIMSK1|=(1<<OCIE1A); // timer A compare match interrupt
+    TIMSK1|=(1<<TOIE1); // overflow interrupt
 	sei();
 }
 
 int main()
 {
-    _delay_ms(1000); // soft start-up
+    DDRB|=(1<<PB1); // set PWM pin as output
+    PORTB|=(1<<PB1); // pull high on start-up
+    _delay_ms(500); // wait for soft start-up
+    PORTB&=~(1<<PB1); // pull low like usual
+    _delay_ms(500); // wait for soft start-up
+    
     SetupPWM();
     OCR1A=500; // set this value to set PWM
     for(;;){}
