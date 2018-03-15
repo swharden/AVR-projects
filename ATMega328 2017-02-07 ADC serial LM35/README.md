@@ -30,6 +30,7 @@ void init_ADC(){
 	ADCSRA|=_BV(ADEN);// ADC enable
 	ADCSRA|=_BV(ADIE); // when sei(), ADC conversion complete interrupt is activated
 	ADCSRA|=_BV(ADPS1)|_BV(ADPS0); // prescale by 8	(make sure CK/prescale is 50kHz-200kHz)
+	// make a read by getting the value of "ADC"
 }
 ```
 
@@ -41,6 +42,7 @@ void ADC_read_quiet(){
     sleep_enable(); // enable sleep
     sleep_mode(); // run the sleep mode (this starts an ADC read like ADCSRA |= (1<<ADSC) does)
     // ...when conversion is complete, ADC_vect is called, then we wake up and continue...
+    // make a read by getting the value of "ADC"
     sleep_disable(); // disable sleep
 }
 ```
