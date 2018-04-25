@@ -4,6 +4,5 @@ This folder contains demo files showing how to get an AVR (ATMega328P) to contro
 
 *[MAX7219 datasheet](https://datasheets.maximintegrated.com/en/ds/MAX7219-MAX7221.pdf)
 
-~[](board1.jpg)
-
-~[](demo.jpg)
+~![](demo.jpg)
+~![](board1.jpg)
