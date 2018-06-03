@@ -11,4 +11,4 @@
 * `ftdiDDS -help` _shows all options including a wiring diagram_
 
 ### Compiled Program
-Although the Visual Studio code is provided in the source folder, the zip contains just the compiled program and supportive libraries. It is ready to run with no additional setup.
+**[ftdiDDS.zip](ftdiDDS.zip)** contains just the compiled program and supportive libraries. It is ready to run with no additional setup!
