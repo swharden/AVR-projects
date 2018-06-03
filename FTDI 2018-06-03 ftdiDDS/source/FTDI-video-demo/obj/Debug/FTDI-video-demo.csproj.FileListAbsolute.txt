@@ -1,0 +1,7 @@
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\bin\Debug\FTDI-video-demo.exe.config
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\bin\Debug\FTDI-video-demo.exe
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\bin\Debug\FTDI-video-demo.pdb
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\bin\Debug\FTD2XX_NET.dll
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\obj\Debug\FTDI-video-demo.csproj.CoreCompileInputs.cache
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\obj\Debug\FTDI-video-demo.exe
+C:\Users\scott\Documents\temp\video demo\FTDI-video-demo\FTDI-video-demo\obj\Debug\FTDI-video-demo.pdb
