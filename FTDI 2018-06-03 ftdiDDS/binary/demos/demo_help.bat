@@ -1,0 +1,2 @@
+..\ftdiDDS.exe -help
+pause
