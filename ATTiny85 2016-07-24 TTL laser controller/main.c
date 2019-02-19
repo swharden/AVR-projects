@@ -8,8 +8,8 @@ int main (void){
 	while(1){
 		while((PINB&(1<<PB2))==0){} // hang while LOW
 		PORTB=(1<<PB0); // TTL ON
-		_delay_ms(20);
+		_delay_ms(5);
 		PORTB&=~(1<<PB0); // TTL OFF
-		_delay_ms(46);
+		_delay_ms(20);
 	}
 }
