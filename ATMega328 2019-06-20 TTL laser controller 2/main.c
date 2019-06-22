@@ -2,15 +2,11 @@
  * ATMega328P - 4 channel laser controller
  * 
  * Read inputs on pins 2-5 (PD0-PD3)
- *  - inputs are TTL from an opto-isolated high-voltage source (with H11A1)
- *  - input runs through a 10K series resistor (2.8 mA at 28V)
- * 
- * Produce output on pins 28-25 (PC5-PC2) if corresponding inputs are high.
- *  - output is a modulated signal: 25 ms period (40 Hz) with 5 ms high.
- * 
+ * Produce modulated output on pins 28-25 (PC5-PC2)
+ *
  */
 
-#define F_CPU 11059200ul // 1MHz internal RC clock
+#define F_CPU 11059200ul
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -125,7 +121,7 @@ void respondToInputsForever()
 void testLights(int times)
 {
 	// turn every output on and off several times in sequence
-	// don't keep this in production or it will turn on the laser
+	// don't use this in production - it will turn on the laser!
 	while (times--)
 	{
 		char i;
