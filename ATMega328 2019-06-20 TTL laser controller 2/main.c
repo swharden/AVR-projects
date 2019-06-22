@@ -2,7 +2,7 @@
  * ATMega328P - 4 channel laser controller
  * 
  * Read inputs on pins 2-5 (PD0-PD3)
- *  - inputs are TTL from an opto-isolated high-voltage source (with H11A1A)
+ *  - inputs are TTL from an opto-isolated high-voltage source (with H11A1)
  *  - input runs through a 10K series resistor (2.8 mA at 28V)
  * 
  * Produce output on pins 28-25 (PC5-PC2) if corresponding inputs are high.
