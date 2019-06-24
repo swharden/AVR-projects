@@ -21,7 +21,7 @@ const char msLow = 20;
 ```
 
 ## Hardware
-* [ABS junction box with transparent cover](https://www.amazon.com/uxcell-200mmx120mmx113mm-Universal-Enclosure-Transparent/dp/B071FKFLKZ/) (6.2"x3.5X"2.3")
+* [ABS junction box with transparent cover](https://www.amazon.com/uxcell-200mmx120mmx113mm-Universal-Enclosure-Transparent/dp/B071FKFLKZ/) (6.2" x 3.5" x 2.3")
 * [solderable breadboard](https://www.amazon.com/Gikfun-Solder-able-Breadboard-Plated-Arduino/dp/B071R3BFNL/)
 
 ![](IMG_5205.JPG)
