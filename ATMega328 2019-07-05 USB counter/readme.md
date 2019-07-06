@@ -32,3 +32,8 @@ This project contains the design and microcontroller code for a USB logging freq
 * [SMA connector](https://www.mouser.com/ProductDetail/LPRS/SMA-CONNECTOR?qs=sGAEpiMZZMuLQf%252BEuFsOrkd7M7rmHNHidLMZ%2Ftb%252B0T1YCJLScw0qLA%3D%3D) ($1.08)
 
 Total is ~$10
+
+## Changes for Rev2
+* simple connection for SPI-driven 7-segment display like [this](https://www.amazon.com/dp/B07CL2YNJQ)
+* make PCB smaller
+* add mounting screw holes
