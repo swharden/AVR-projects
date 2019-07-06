@@ -2,6 +2,8 @@
 
 This project contains the design and microcontroller code for a USB logging frequency counter. The entire project is open source (open software / open hardware). This project developed from a discussion that started [here](https://github.com/swharden/AVR-projects/issues/1).
 
+The current PCB fabrication cost at OSHPark is $17.40 for 3 ($5.80 each)
+
 ![](pcb-3d.png)
 ![](pcb-wires.png)
 ![](schematic.png)
