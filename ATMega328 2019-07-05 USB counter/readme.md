@@ -39,3 +39,4 @@ Total is ~$10
 * simple connection for SPI-driven 7-segment display like [this](https://www.amazon.com/dp/B07CL2YNJQ)
 * make PCB smaller
 * add mounting screw holes
+* make front-end high impedance
