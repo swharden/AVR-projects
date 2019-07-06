@@ -5,8 +5,16 @@ This project contains the design and microcontroller code for a USB logging freq
 The current PCB fabrication cost at OSHPark is $17.40 for 3 ($5.80 each)
 
 ![](pcb-3d.png)
+
+#### Schematic
 ![](pcb-wires.png)
+
+#### Schematic
+See Rev2 notes below for thoughts regarding changing resistor values for the front-end
 ![](schematic.png)
+
+#### Simulated Front-End (200 mV PPV input signal)
+![](LTSpice/screenshot.jpg)
 
 ## Features
 * USB connection allows PC monitoring/logging of frequency
