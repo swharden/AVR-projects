@@ -40,3 +40,4 @@ Total is ~$10
 * make PCB smaller
 * add mounting screw holes
 * make front-end high impedance
+* make R9 1K for higher front-end gain
