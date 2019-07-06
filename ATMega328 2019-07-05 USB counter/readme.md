@@ -6,14 +6,14 @@ The current PCB fabrication cost at OSHPark is $17.40 for 3 ($5.80 each)
 
 ![](pcb-3d.png)
 
-#### Schematic
+### PCB
 ![](pcb-wires.png)
 
-#### Schematic
+### Schematic
 See Rev2 notes below for thoughts regarding changing resistor values for the front-end
 ![](schematic.png)
 
-#### Simulated Front-End (200 mV PPV input signal)
+### Simulated Front-End (200 mV PPV input signal)
 ![](LTSpice/screenshot.jpg)
 
 ## Features
