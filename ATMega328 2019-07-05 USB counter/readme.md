@@ -34,7 +34,9 @@ See Rev2 notes below for thoughts regarding changing resistor values for the fro
 
 ## Components
 * all passives are 0805 (~$1)
-* [10MHz 3.3V oscillator](https://www.mouser.com/ProductDetail/Fox/FOX924B-10000?qs=sGAEpiMZZMt8oz%2FHeiymAOqzUXC3weGFrHcwaz7vvYI%3D) ($2.35)
+* 10MHz TCXO
+  * [2.5 PPM 3.3V oscillator](https://www.mouser.com/ProductDetail/Fox/FOX924B-10000?qs=sGAEpiMZZMt8oz%2FHeiymAOqzUXC3weGFrHcwaz7vvYI%3D) ($2.35)
+  * [0.2 PPM](https://www.mouser.com/ProductDetail/Murata-Electronics/XTCLH10M000THJA0P0?qs=sGAEpiMZZMt8oz%2FHeiymAP2I3XxjUzcDnJXTALencTGO8W9AcI4jWQ%3D%3D) alternative ($9.24)
 * [SN74LV8154](https://www.mouser.com/ProductDetail/Texas-Instruments/SN74LV8154PWR?qs=sGAEpiMZZMtdY2G%252BSI3N4aQvQNXOTGN6Ghdjz%252BkScFE%3D) ($0.99) TSSOP-20
 * [FT230XS-R](https://www.mouser.com/ProductDetail/FTDI/FT230XS-R?qs=sGAEpiMZZMtv%252Bwxsgy%2FhiIaF6qCroMVR1i2pEQA5UpU%3D) ($2.04) SSOP-16
 * [ATMega328](https://www.mouser.com/ProductDetail/Microchip-Technology-Atmel/ATMEGA328PB-AU?qs=sGAEpiMZZMvc81WFyF5EdrSRAEYMYvHlMc95YQj%2FArE%3D) ($1.38)
