@@ -1,0 +1,21 @@
+Circuit: * C:\Users\scott\Documents\GitHub\AVR-projects\ATMega328 2019-07-05 USB counter\LTSpice\Draft2.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Fri Jul 05 21:06:46 2019
+Total elapsed time: 0.250 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 178376
+traniter = 178368
+tranpoints = 56363
+accept = 37631
+rejected = 18732
+matrix size = 14
+fillins = 0
+solver = Normal
+Matrix Compiler1: 804 bytes object code size  0.2/0.1/[0.1]
+Matrix Compiler2: off  [0.1]/0.1/0.1
+
