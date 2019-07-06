@@ -36,8 +36,11 @@ The current PCB fabrication cost at OSHPark is $17.40 for 3 ($5.80 each)
 Total is ~$10
 
 ## Changes for Rev2
-* simple connection for SPI-driven 7-segment display like [this](https://www.amazon.com/dp/B07CL2YNJQ)
-* make PCB smaller
+* add pins to connect a SPI-driven 7-segment display like [this](https://www.amazon.com/dp/B07CL2YNJQ)
+  * Make sure the MCU code is working for this first
+  * You may be able to use PE0-3 (pins 3, 6, 19, and 22)
+* make PCB smaller (there's lots of wasted space currently)
 * add mounting screw holes
-* make front-end high impedance
-* make R9 1K for higher front-end gain
+* use higher impedance front-end
+  * make R13 1K for higher input impedance
+  * make R9 1K for higher gain
