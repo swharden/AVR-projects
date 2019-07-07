@@ -14,7 +14,7 @@ See Rev2 notes below for thoughts regarding changing resistor values for the fro
 ![](schematic.png)
 
 ### Simulated Front-End (200 mV PPV input signal)
-![](LTSpice/screenshot.jpg)
+![](LTSpice/screenshot.png)
 
 ## Features
 * USB connection allows PC monitoring/logging of frequency
@@ -51,6 +51,3 @@ Total is ~$10
   * You may be able to use PE0-3 (pins 3, 6, 19, and 22)
 * make PCB smaller (there's lots of wasted space currently)
 * add mounting screw holes
-* use higher impedance front-end
-  * make R13 1K for higher input impedance
-  * make R9 1K for higher gain

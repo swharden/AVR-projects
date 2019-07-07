@@ -824,7 +824,7 @@ L Device:R R13
 U 1 1 5D544A50
 P 4050 6000
 F 0 "R13" V 4150 6000 50  0000 C CNN
-F 1 "50" V 4250 6000 50  0000 C CNN
+F 1 "1k" V 4250 6000 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 3980 6000 50  0001 C CNN
 F 3 "~" H 4050 6000 50  0001 C CNN
 	1    4050 6000
@@ -925,7 +925,7 @@ L Device:R R9
 U 1 1 5D6303F3
 P 5400 5450
 F 0 "R9" H 5550 5500 50  0000 C CNN
-F 1 "10K" H 5550 5400 50  0000 C CNN
+F 1 "1k" H 5550 5400 50  0000 C CNN
 F 2 "Resistor_SMD:R_0805_2012Metric_Pad1.15x1.40mm_HandSolder" V 5330 5450 50  0001 C CNN
 F 3 "~" H 5400 5450 50  0001 C CNN
 	1    5400 5450
@@ -934,8 +934,6 @@ $EndComp
 Wire Wire Line
 	5400 5300 5400 5250
 Text Notes 3500 6800 0    59   Italic 0
-this will be extremely sensitive
-Text Notes 3500 6900 0    59   Italic 0
 this will pick up noise and/or oscillate if no signal is supplied
 $Comp
 L Device:C C8
@@ -1000,8 +998,6 @@ Wire Notes Line
 	3500 5100 6600 5100
 Wire Notes Line
 	3500 6700 6600 6700
-Text Notes 3500 7000 0    59   Italic 0
-large >30V (PPV) inputs require extra series resistance
 Wire Wire Line
 	1550 4950 1900 4950
 Text Notes 900  6150 0    59   ~ 0

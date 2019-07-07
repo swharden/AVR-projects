@@ -2,20 +2,20 @@ Circuit: * C:\Users\scott\Documents\GitHub\AVR-projects\ATMega328 2019-07-05 USB
 
 Direct Newton iteration for .op point succeeded.
 
-Date: Sat Jul 06 10:11:13 2019
-Total elapsed time: 1.471 seconds.
+Date: Sun Jul 07 10:29:57 2019
+Total elapsed time: 0.262 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 1234219
-traniter = 1234211
-tranpoints = 427978
-accept = 278975
-rejected = 149003
+totiter = 182555
+traniter = 182550
+tranpoints = 53978
+accept = 35591
+rejected = 18387
 matrix size = 14
 fillins = 0
 solver = Normal
 Matrix Compiler1: 804 bytes object code size  0.2/0.1/[0.1]
-Matrix Compiler2: off  [0.1]/0.2/0.1
+Matrix Compiler2: 1.07 KB object code size  0.1/0.1/[0.1]
 
