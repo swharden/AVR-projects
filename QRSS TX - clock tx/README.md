@@ -22,7 +22,6 @@ This project explores an oddball QRSS transmitter design.
   * 35mA max output current (8x = 280mA)
   * 450mW max total power output
 * [7805 regulator (1A)](https://www.mouser.com/ProductDetail/ON-Semiconductor/MC7805CDTRKG?qs=sGAEpiMZZMtUqDgmOWBjgFMGuATcbJe5wWS0hbY0mRQ%3D) DPAK-3 ($0.56)
-* [78L05 regulator (100 mA)]() SOT-89-3 ($0.33)
 * [SMA connector](https://www.mouser.com/ProductDetail/LPRS/SMA-CONNECTOR?qs=sGAEpiMZZMuLQf%252BEuFsOrkd7M7rmHNHidLMZ%2Ftb%252B0T1YCJLScw0qLA%3D%3D) ($1.08)
 * varactor - use an 0805 LED for now
 
