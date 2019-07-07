@@ -47,11 +47,10 @@ $GPGLL,2937.57080,N,08220.33445,W,184130.00,A,D*79
 
 u-Center: https://www.u-blox.com/en/product/u-center
 
-![](ucenter-screenshot.png)
-
+![](uCenter-screenshot.png)
 
 To modify the functionality of your module: View->Messages View
 
 I was able to change the frequency of the PPS signal this way, but it resets to the default (1PPS) when the module is rebooted.
 
-![](ucenter-customize-timepulse.png)
+![](uCenter-customize-timepulse.PNG)
