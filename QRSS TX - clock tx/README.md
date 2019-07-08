@@ -7,6 +7,7 @@ This project explores an oddball QRSS transmitter design.
 * The CKOUT signal will be buffered with a line driver
 * The frequency can be adjusted with a voltage applied to a varactor
 
+![](schematic.png)
 
 # Components
 * [10.140 MHz crystal](https://www.mouser.com/ProductDetail/IQD/LFXTAL013480Bulk?qs=e4%2FAndAAwgLefIQQ1kDEyw%3D%3D) ($0.75)
