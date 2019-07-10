@@ -13,7 +13,8 @@ This project explores an oddball QRSS transmitter design.
 
 # Components
 * passives (free)
-* [10uF capacitor](https://www.mouser.com/ProductDetail/Taiyo-Yuden/GMK212BBJ106KG-T?qs=sGAEpiMZZMs0AnBnWHyRQPSjYu%2Fkbgu8jC8AZ5Vshl1rlGMRpR%252BRRQ%3D%3D) 0805 ($0.61)
+* [10uF capacitor (35V)](https://www.mouser.com/ProductDetail/Taiyo-Yuden/GMK212BBJ106KG-T?qs=sGAEpiMZZMs0AnBnWHyRQPSjYu%2Fkbgu8jC8AZ5Vshl1rlGMRpR%252BRRQ%3D%3D) 0805 ($0.61)
+* [10uF capacitor (10V)](https://www.mouser.com/ProductDetail/Taiyo-Yuden/LMK212ABJ106MG-T?qs=sGAEpiMZZMs0AnBnWHyRQIHQ3Mw87cdoP86Dk9lrloMw0%2FN1H1pNqw%3D%3D) 0805 ($0.15)
 * [10.140 MHz crystal](https://www.mouser.com/ProductDetail/IQD/LFXTAL013480Bulk?qs=e4%2FAndAAwgLefIQQ1kDEyw%3D%3D) ($0.75)
 * [ATTiny2313](https://www.mouser.com/ProductDetail/Microchip-Technology-Atmel/ATTINY2313A-SU?qs=sGAEpiMZZMvqv2n3s2xjsRLJ5ROJ0gc0dZSXrqbzGMo%3D) SOIC-20 ($1.12)
 * [74HC04](https://www.mouser.com/ProductDetail/Toshiba/74HC04DBJ?qs=sGAEpiMZZMutVWjHE%2FYQw9wp2KmMZae1rDJE3jT16hQ%3D) SOIC-14 ($0.40)
