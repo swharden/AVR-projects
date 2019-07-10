@@ -37,3 +37,10 @@ This project explores an oddball QRSS transmitter design.
 * [What is QRSS?](https://www.qsl.net/m0ayf/What-is-QRSS.html)
 * [Genesis Q5 transmitter](http://www.genesisradio.com.au/Q5/) uses a 74HC04N as an oscillator and also to buffer and amplify the output.
 * [Using 74HC240 as a buffer amplifier](http://py2ohh.w2c.com.br/trx/digital/rfdigital.htm)
+
+## Software
+* [Argo](https://digilander.libero.it/i2phd/argo/) - a spectrograph for QRSS
+
+## Online Calculators
+* [capacitor impedance calculator](http://www.learningaboutelectronics.com/Articles/Capacitor-impedance-calculator.php)
+* [inductor impedance calculator](http://www.learningaboutelectronics.com/Articles/Inductor-impedance-calculator.php)
