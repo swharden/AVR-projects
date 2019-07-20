@@ -3,12 +3,12 @@ Simple-case example how to get the AVR to send some data to a PC (in my case, vi
 
 > for ideas on how to handle TX (by polling or interrupt-driven), check the ATMega328 USART examples one folder up...
 
-###Determining UBRR
+### Determining UBRR
 ```C
 #define USART_BAUDRATE 4800
 #define UBRR_VALUE (((F_CPU/(USART_BAUDRATE*16UL)))-1)
 ```
-###Initializing (TX only)
+### Initializing (TX only)
 ```C
 void serial_init(){
 	// initialize USART
@@ -19,7 +19,7 @@ void serial_init(){
 }
 ```
 
-###Sending Data
+### Sending Data
 ```C
 void serial_send(unsigned char data){
 	// send a single character via USART
@@ -28,5 +28,5 @@ void serial_send(unsigned char data){
 }
 ```
 
-###Demo
+### Demo
 ![](demo.png)
