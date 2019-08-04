@@ -1,9 +1,12 @@
 
 void SpiInitialize(void)
 {
-	DDRB |= (1 << PB5);  // set SCK as output
-	DDRB |= (1 << PB3);  // set MOSI as output
-	DDRB |= (1 << PB2);  // set CS as output
+	DDRB |= (1 << PB5); // set SCK as output
+	DDRB |= (1 << PB3); // set MOSI as output
+	DDRB |= (1 << PB2); // set CS as output
+
+	PORTB |= (1 << PB5); // set SCK high
+	PORTB |= (1 << PB3); // set MOSI high
 	PORTB |= (1 << PB2); // set CS high
 
 	SPCR |= (1 << SPE);  // enable SPI
