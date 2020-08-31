@@ -8,9 +8,11 @@ The sn74lv8154 is a dual 16-bit counter than can be configured to act as a 32-bi
 
 This program measures frequency with the AVR and outputs frequency (counts) to a computer via the serial port. Included is a barebones python script to display these frequency counts.
 
-
-
 ![](idea.png)
+
+***WARNING:*** This schematic does not show [proper termination of the feed line](https://en.wikipedia.org/wiki/Electrical_termination). \
+If using 50 Ohm coax, add a 50 Ohm resister between pin 1 and ground. _Thanks freemo_ ([#2](https://github.com/swharden/AVR-projects/issues/2))
+
 ![](ss.png)
 ![](IMG_8318.JPG)
 _note: My tests on a breadboard showed this setup easily counts VHF frequencies over 100MHz (screenshot below). However, when I built it in an enclosure, it struggled to measure frequencies above 70MHz. It works well at 50MHz. I suspect this is because the signal I'm using doesn't travel well through 50 Ohm coax, but nontheless note that this is somewhat sketchy at VHF frequencies. Here it is clocking a canned 50MHz oscillator._
