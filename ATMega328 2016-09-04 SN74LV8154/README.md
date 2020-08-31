@@ -1,7 +1,10 @@
-# PROJECT HOMEPAGE
-* http://www.swharden.com/wp/2016-09-05-vhf-frequency-counter-with-pc-interface/
+# Newer Project - USB Counter with SN74lV8154
+This project became its own GitHub repository:
+* **https://github.com/swharden/USB-Counter** 👈 improved schematics and notes
 
-# sn74lv8154 AVR counter
+# Original Project - SN74lV8154 AVR counter
+This folder describes the design described on the original project page: http://www.swharden.com/wp/2016-09-05-vhf-frequency-counter-with-pc-interface/
+
 The sn74lv8154 is a dual 16-bit counter than can be configured to act as a 32-bit counter. Although the datasheet doesn't report functionality at VHF frequencies, in my tests it works at least at 100MHz. The way I operate it is as a frequency counter with a gate. I'm measuring unknown frequencies with 1 pulse per second gate (from a GPS unit).
 
 * Datasheet: http://www.ti.com/lit/ds/symlink/sn74lv8154.pdf
