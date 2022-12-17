@@ -23,17 +23,19 @@ void configure_1pps(){
 	TCA0.SINGLE.CTRLA |= TCA_SINGLE_CLKSEL_DIV64_gc; // set clock source
 	TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm; // start timer}
 
-volatile uint8_t count = 0;
+volatile uint8_t overflow_count = 0; //
 
-ISR(TCA0_OVF_vect)
+ISR(TCA0_OVF_vect) // called 10 times per second
 {
-	if (count+ == 10){
-		count = 0;
+	overflow_count++;
+	if (overflow_count == 10){
+		overflow_count = 0;
 		PORTA.OUT = PIN4_bm;
 		} else {
 		PORTA.OUT = 0;
 	}
-}
+	
+	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled}
 int main(void)
 {
 	PORTA.DIR |= PIN4_bm; // set LED pin as output
