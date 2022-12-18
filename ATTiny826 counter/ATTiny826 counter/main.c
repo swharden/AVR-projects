@@ -1,3 +1,7 @@
+/* 
+	This program demonstrates how to cascade the two 16-bit TCB counters to form a 32-bit counter. 
+	The clock counted with TC1 and interrupts are used to produce a signal once per second to gate the counter.
+*/
 #define F_CPU 10000000UL
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -18,15 +22,17 @@ void configure_clock_external_10mhz(){
 void configure_1pps(){
 	TCA0.SINGLE.INTCTRL = TCA_SINGLE_OVF_bm; // overflow interrupt
 	TCA0.SINGLE.CTRLB = TCA_SINGLE_WGMODE_NORMAL_gc; // normal mode
-	TCA0.SINGLE.PER = 31250UL; // timer period
+	TCA0.SINGLE.PER = 31249UL; // timer period (overflows every 200 ms)
 	TCA0.SINGLE.CTRLA |= TCA_SINGLE_CLKSEL_DIV64_gc; // set clock source
 	TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm; // start timer
 }
 
 void configure_cascaded_counter(){
-	// Use the event system to route TCB0 overflows to TCB1 over channel 0
+	// Configure the event system to route TCB0 overflows to TCB1
 	EVSYS.CHANNEL0 = EVSYS_CHANNEL0_TCB0_OVF_gc;
 	EVSYS.USERTCB1COUNT = EVSYS.CHANNEL0;
+	
+	// Configure the event system to route the same capture event (CAPT) generator to both TCBs
 	
 	// configure timer B0 to count clock cycles
 	TCB0.CTRLA = TCB_ENABLE_bm;
@@ -39,23 +45,18 @@ void configure_cascaded_counter(){
 
 unsigned long last_count = 0;
 void send_current_count(){
-	int lsb = TCB0.CNT;
-	int msb = TCB1.CNT;
+	unsigned int lsb = TCB0.CNT;
+	unsigned int msb = TCB1.CNT;
 	unsigned long newCount = msb;
 	newCount = newCount << 16;
 	newCount += lsb;
 	
-	unsigned long count = newCount - last_count;
+	unsigned long diff = newCount - last_count;
 	last_count = newCount;
-	
-	unsigned long int divby=1000000000;
-	while (divby){
-		USART0_sendChar('0'+count/divby);
-		count-=(count/divby)*divby;
-		divby/=10;
-	}
-	USART0_sendChar('\r');
-	USART0_sendChar('\n');
+	SERIAL_sendUnsignedLong(newCount);
+	SERIAL_sendComma();
+	SERIAL_sendUnsignedLong(diff);
+	SERIAL_sendBreak();
 }
 
 uint8_t overflow_count;
@@ -82,9 +83,6 @@ int main(void)
 	configure_cascaded_counter();
 	sei();
 	PORTB.DIR |= PIN1_bm;
-	
-	while (1)
-	{
-	}
+	while (1) {	}
 }
 

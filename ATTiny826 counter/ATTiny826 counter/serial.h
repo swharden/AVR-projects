@@ -35,3 +35,21 @@ void USART0_sendString(char *str)
 		USART0_sendChar(str[i]);
 	}
 }
+
+static void SERIAL_sendComma(){
+	USART0_sendChar(',');
+}
+
+static void SERIAL_sendBreak(){
+	USART0_sendChar('\r');
+	USART0_sendChar('\n');
+}
+
+static void SERIAL_sendUnsignedLong(unsigned long count){
+	unsigned long int divby=1000000000;
+	while (divby){
+		USART0_sendChar('0'+count/divby);
+		count-=(count/divby)*divby;
+		divby/=10;
+	}
+}
