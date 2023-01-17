@@ -30,7 +30,7 @@ public partial class Form1 : Form
         cbDevices.Enabled = false;
         btnOpen.Enabled = false;
         FTMan.OpenByIndex(cbDevices.SelectedIndex);
-        FTMan.SetupAdc();
+        FTMan.SetupSPI();
         timer1.Enabled = true;
         SW.Restart();
     }

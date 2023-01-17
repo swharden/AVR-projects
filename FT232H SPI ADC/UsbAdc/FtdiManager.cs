@@ -41,7 +41,7 @@ internal class FtdiManager
             throw new InvalidOperationException(Status.ToString());
     }
 
-    public void SetupAdc()
+    public void SetupSPI()
     {
         FtdiDevice.ResetDevice();
         AssertOK();
