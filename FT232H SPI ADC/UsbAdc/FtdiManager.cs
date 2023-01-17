@@ -1,6 +1,4 @@
 ﻿using FTD2XX_NET;
-using System.Net;
-using System;
 
 namespace UsbAdc;
 
@@ -69,8 +67,6 @@ internal class FtdiManager
         // The SK clock frequency can be worked out by below algorithm with divide by 5 set as off
         // SCL Frequency (MHz) = 60 / ((1 + DIVISOR) * 2)
         UInt32 clockDivisor = 29; // for 1 MHz
-
-        clockDivisor *= 100; // slow it way down
 
         byte[] bytes2 = new byte[]
         {

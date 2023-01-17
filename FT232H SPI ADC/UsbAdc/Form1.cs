@@ -7,6 +7,7 @@ public partial class Form1 : Form
     readonly FtdiManager FTMan = new();
     readonly Stopwatch SW = new();
     double MaxSeenValue = 0;
+    int Readings = 0;
 
     public Form1()
     {
@@ -37,11 +38,15 @@ public partial class Form1 : Form
     private void timer1_Tick(object sender, EventArgs e)
     {
         double value = FTMan.ReadAdc();
+        Readings += 1;
         label1.Text = $"{value}";
         MaxSeenValue = Math.Max(MaxSeenValue, value);
 
         pnlLevel.Location = new(0, 0);
         pnlLevel.Height = pnlContainer.Height;
         pnlLevel.Width = (int)(pnlContainer.Width * (value / MaxSeenValue));
+
+        Text = $"Read {Readings} in {SW.Elapsed.TotalSeconds:N2} sec " +
+            $"({Readings / SW.Elapsed.TotalSeconds:N2} Hz)";
     }
 }
