@@ -4,7 +4,7 @@ namespace UsbAdc;
 
 public partial class Form1 : Form
 {
-    readonly FtdiManager FTMan = new();
+    readonly FTD2XX_NET.TwiCommunicator FTCOM = new();
     readonly Stopwatch SW = new();
     double MaxSeenValue = 0;
     int Readings = 0;
@@ -16,7 +16,7 @@ public partial class Form1 : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        foreach (var device in FTMan.Scan())
+        foreach (var device in FTCOM.Scan())
             cbDevices.Items.Add($"{device.Type} ({device.ID})");
 
         if (cbDevices.Items.Count > 0)
@@ -29,17 +29,15 @@ public partial class Form1 : Form
     {
         cbDevices.Enabled = false;
         btnOpen.Enabled = false;
-        FTMan.OpenByIndex(cbDevices.SelectedIndex);
-        FTMan.I2C_ConfigureMpsse();
+        FTCOM.OpenByIndex(cbDevices.SelectedIndex);
+        FTCOM.I2C_ConfigureMpsse();
         timer1.Enabled = true;
         SW.Restart();
     }
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        FTMan.I2C_ConfigureMpsse();
-
-        double value = FTMan.ReadI2C();
+        double value = FTCOM.I2C_ReadADC();
         Readings += 1;
         label1.Text = $"{value}";
         MaxSeenValue = Math.Max(MaxSeenValue, value);
