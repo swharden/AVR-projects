@@ -30,14 +30,16 @@ public partial class Form1 : Form
         cbDevices.Enabled = false;
         btnOpen.Enabled = false;
         FTMan.OpenByIndex(cbDevices.SelectedIndex);
-        FTMan.SetupSPI();
+        FTMan.I2C_ConfigureMpsse();
         timer1.Enabled = true;
         SW.Restart();
     }
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        double value = FTMan.ReadAdc();
+        FTMan.I2C_ConfigureMpsse();
+
+        double value = FTMan.ReadI2C();
         Readings += 1;
         label1.Text = $"{value}";
         MaxSeenValue = Math.Max(MaxSeenValue, value);
