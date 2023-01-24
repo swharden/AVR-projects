@@ -31,6 +31,7 @@ public partial class Form1 : Form
         btnOpen.Enabled = false;
         FTCOM.OpenByIndex(cbDevices.SelectedIndex);
         FTCOM.I2C_ConfigureMpsse();
+        lblDevices.Text = string.Join(", ", FTCOM.I2C_Scan());
         timer1.Enabled = true;
         SW.Restart();
     }

@@ -1,6 +1,7 @@
 ﻿/* This file was tested using a LM75A I2C temperature sensor */
 
 using FTD2XX_NET;
+using System.Reflection;
 
 namespace UsbAdc.FTD2XX_NET;
 internal class TwiCommunicator : CommunicatorBase
@@ -107,7 +108,7 @@ internal class TwiCommunicator : CommunicatorBase
         Write(bytes.ToArray());
     }
 
-    public void I2C_SendDeviceAddr(byte address, bool read)
+    public bool I2C_SendDeviceAddr(byte address, bool read, bool throwOnNAK = false)
     {
         const byte I2C_Data_SDAhi_SCLlo = 0x02;
         const byte MSB_FALLING_EDGE_CLOCK_BYTE_OUT = 0x11;
@@ -144,8 +145,11 @@ internal class TwiCommunicator : CommunicatorBase
         byte[] rx1 = ReadBytes(1);
 
         // if ack bit is 0 then sensor acked the transfer, otherwise it nak'd the transfer
-        if ((rx1[0] & 0x01) != 0)
+        bool ack = (rx1[0] & 0x01) == 0;
+        if (!ack && throwOnNAK)
             throw new InvalidOperationException("NAKd");
+
+        return ack;
     }
 
     public byte I2C_ReadByte(bool ACK)
@@ -199,5 +203,25 @@ internal class TwiCommunicator : CommunicatorBase
         byte b2 = I2C_ReadByte(ACK: false);
         I2C_SetStop();
         return (b1 * 256 + b2) / 32;
+    }
+
+    public string[] I2C_Scan()
+    {
+        List<string> devices = new();
+
+        for (int address = 1; address < 127; address++)
+        {
+            I2C_SetStart();
+            bool ack = I2C_SendDeviceAddr((byte)address, read: true);
+            I2C_SetStop();
+
+            if (ack)
+                devices.Add($"0x{address:X2}");
+        }
+
+        if (devices.Count == 0)
+            return new string[] { "No devices found" };
+
+        return devices.ToArray();
     }
 }

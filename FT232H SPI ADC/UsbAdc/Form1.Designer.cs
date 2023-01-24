@@ -35,6 +35,7 @@ partial class Form1
             this.label1 = new System.Windows.Forms.Label();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.pnlLevel = new System.Windows.Forms.Panel();
+            this.lblDevices = new System.Windows.Forms.Label();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,11 +91,21 @@ partial class Form1
             this.pnlLevel.Size = new System.Drawing.Size(200, 40);
             this.pnlLevel.TabIndex = 0;
             // 
+            // lblDevices
+            // 
+            this.lblDevices.AutoSize = true;
+            this.lblDevices.Location = new System.Drawing.Point(291, 15);
+            this.lblDevices.Name = "lblDevices";
+            this.lblDevices.Size = new System.Drawing.Size(162, 15);
+            this.lblDevices.TabIndex = 4;
+            this.lblDevices.Text = "I2C devices not yet scanned...";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 197);
+            this.Controls.Add(this.lblDevices);
             this.Controls.Add(this.pnlContainer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOpen);
@@ -117,4 +128,5 @@ partial class Form1
     private Label label1;
     private Panel pnlContainer;
     private Panel pnlLevel;
+    private Label lblDevices;
 }
