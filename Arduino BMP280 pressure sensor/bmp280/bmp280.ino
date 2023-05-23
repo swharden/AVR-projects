@@ -1,10 +1,6 @@
-#include <DigitLedDisplay.h>
-
 #include <Wire.h>
 
 int16_t DEVICE_ADDRESS = 0x76;
-
-DigitLedDisplay ld = DigitLedDisplay(7, 6, 5);
 
 int32_t t_fine;
 uint16_t dig_T1;
@@ -22,14 +18,13 @@ int16_t dig_P8;
 int16_t dig_P9;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
+  Serial.println("Starting...");
   Wire.begin();
-
-  ld.setBright(15);  // range is 0-15
-  ld.setDigitLimit(8);
 }
 
 void loop() {
+  Serial.println("Starting reading...");
   readCalibrationData();
   setupConfigRegister();
   setupControlRegister();
@@ -43,12 +38,21 @@ void loop() {
   float presPa = presConv / 256.0;
   float presPSI = presPa / 6894.76;
 
-  ld.printDigit(temp);
-
-  Serial.print(presPa);
-  Serial.print(',');
+  Serial.print("Temperature: ");
+  Serial.print(temp);
+  Serial.print(" (");
   Serial.print(tempF);
+  Serial.print(" F)");
   Serial.println();
+
+  Serial.print("Pressure: ");
+  Serial.print(pres);
+  Serial.print(" (");
+  Serial.print(presPSI);
+  Serial.print(" PSI)");
+  Serial.println();
+
+  delay(1000);
 }
 
 void readCalibrationData() {
@@ -92,8 +96,8 @@ void setupConfigRegister() {
 
 void setupControlRegister() {
   byte ctrl = 0;
-  ctrl |= 0b00100000;  // oversampling (x1)
-  ctrl |= 0b00000100;  // osrs_p (disable oversampling)
+  ctrl |= 0b01100000;  // set temperature resolution
+  ctrl |= 0b00001100;  // set pressure resolution
   ctrl |= 0b00000011;  // mode (normal)
 
   Wire.beginTransmission(DEVICE_ADDRESS);
@@ -112,6 +116,14 @@ uint32_t getPressure() {
   byte press_lsb = Wire.read();
   byte press_xlsb = Wire.read();
 
+  Serial.print("Pressure bytes: ");
+  Serial.print(press_msb);
+  Serial.print(", ");
+  Serial.print(press_lsb);
+  Serial.print(", ");
+  Serial.print(press_xlsb);
+  Serial.println();
+
   uint32_t result;
   result += (uint32_t)press_msb << 16;
   result += (uint32_t)press_lsb << 8;
@@ -129,6 +141,18 @@ int16_t ReadInt16_LE(byte address) {
   byte lsb = Wire.read();
   byte msb = Wire.read();
 
+  const bool SHOW_CONFIG_BYTES = true;
+
+  if (SHOW_CONFIG_BYTES){
+    Serial.print("bytes at ");
+    Serial.print(address);
+    Serial.print(" are ");
+    Serial.print(lsb);
+    Serial.print(", ");
+    Serial.print(msb);
+    Serial.println();
+  }
+
   return (msb << 8) | (lsb);
 }
 
@@ -141,6 +165,14 @@ uint32_t getTemperature() {
   byte temp_msb = Wire.read();
   byte temp_lsb = Wire.read();
   byte temp_xlsb = Wire.read();
+
+  Serial.print("Temperature bytes: ");
+  Serial.print(temp_msb);
+  Serial.print(", ");
+  Serial.print(temp_lsb);
+  Serial.print(", ");
+  Serial.print(temp_xlsb);
+  Serial.println();
 
   uint32_t result;
   result += (uint32_t)temp_msb << 16;
