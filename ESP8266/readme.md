@@ -66,6 +66,43 @@ void make_request_basic() {
 }
 ```
 
+## HTTP Post with Data
+```cpp
+void make_request(float temp, float pres) {
+
+  String resource = String("http://192.168.1.130/iot/log/");
+
+  String data = String("{")
+                + String("\"key\": \"secret\",")
+                + String("\"sensor\": \"1\",")
+                + String("\"temperature\": \"") + String(temp) + String("\",")
+                + String("\"pressure\": \"") + String(pres) + String("\"")
+                + String("}");
+
+  if ((WiFi.status() != WL_CONNECTED)) {
+    Serial.printf("[HTTP] not connected");
+    return;
+  }
+
+  WiFiClient client;
+  HTTPClient http;
+
+  Serial.print("[HTTP] begin...\n");
+  http.begin(client, resource);
+  http.addHeader("Content-Type", "application/json");
+
+  Serial.print("[HTTP] POST:");
+  Serial.println(data);
+  int httpCode = http.POST(data);
+
+  String payload = http.getString();
+  Serial.printf("[HTTP] Response (code: %d): ", httpCode);
+  Serial.println(payload);
+
+  http.end();
+}
+```
+
 ## HTTPS Request
 ```cpp
 const char* host = "swharden.com";
