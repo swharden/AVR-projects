@@ -1,6 +1,10 @@
 # ESP8266 Notes
 
-![](esp8266-breakout-schematic.jpg)
+[ESP8266 NodeMCU CP2102 ESP-12E Development Board](https://www.amazon.com/dp/B081CSJV2V) $5.43 on Amazon
+
+NodeMCU Pinout | Select Board
+---|---
+![](esp8266-breakout-schematic.jpg)|![](select.png)
 
 ## WiFi Connection
 
