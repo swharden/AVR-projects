@@ -39,6 +39,33 @@ void setup() {
 }
 ```
 
+## HTTP GET
+```cpp
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>
+
+void make_request_basic() {
+
+  WiFiClient client;
+  HTTPClient http;
+
+  Serial.print("[HTTP] Connecting...\n");
+  if (!http.begin(client, "http://swharden.com/iot/test/")) {
+    Serial.println("[HTTP] Unable to connect");
+  }
+
+  Serial.print("[HTTP] GET...\n");
+  int httpCode = http.GET();
+
+  Serial.printf("[HTTP] Response code %d %s\n", httpCode, http.errorToString(httpCode).c_str());
+
+  String payload = http.getString();
+  Serial.println(payload);
+
+  http.end();
+}
+```
+
 ## HTTPS Request
 ```cpp
 const char* host = "swharden.com";
