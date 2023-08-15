@@ -21,7 +21,7 @@ void setup() {
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
-    delay(100);
+    delay(1000);
     Serial.print(".");
   }
 
@@ -47,7 +47,7 @@ void loop() {
   float presPa = presConv / 256.0;
   float presPSI = presPa / 6894.76;
 
-  make_request(tempF, presPSI);
+  make_request(tempF, presConv);
   delay(500);
 
   digitalWrite(LED_PRIMARY, HIGH);
@@ -63,13 +63,13 @@ void wait(int seconds) {
   }
 }
 
-void make_request(float temp, float pres) {
+void make_request(float temp, uint32_t pres) {
 
-  String resource = String("http://192.168.1.130/iot/log/");
+  String resource = String("https://swharden.com/weather/v1/write/");
 
   String data = String("{")
                 + String("\"key\": \"secret\",")
-                + String("\"sensor\": \"1\",")
+                + String("\"sensor\": \"4\",")
                 + String("\"temperature\": \"") + String(temp) + String("\",")
                 + String("\"pressure\": \"") + String(pres) + String("\"")
                 + String("}");
@@ -79,7 +79,11 @@ void make_request(float temp, float pres) {
     return;
   }
 
-  WiFiClient client;
+  WiFiClientSecure client;
+  client.setInsecure();  // WARNING
+  const int HTTPS_PORT = 443;
+  client.connect("swharden.com", HTTPS_PORT);
+
   HTTPClient http;
 
   Serial.print("[HTTP] begin...\n");
