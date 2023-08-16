@@ -1,6 +1,6 @@
 # ATTiny826 PWM
 
-## 16-bit PWM Output
+## 16-bit PWM Output (TCA)
 
 ```c
 #define F_CPU 3333333UL
@@ -40,5 +40,24 @@ int main(void)
 		_delay_ms(500);
 		TCA0.SINGLE.CMP0 = 200;
 	}
+}
+```
+
+## 16-bit PWM Interrupts (TCB)
+
+```c
+#include <avr/interrupt.h>
+```
+
+```c
+TCB0.CTRLA |= TCB_ENABLE_bm; // Enable this peripheral
+TCB0.INTCTRL |= TCB_OVF_bm; // Trigger interrupt on overflow
+sei(); // enable global interrupts
+```
+
+```c
+ISR(TCB0_INT_vect)
+{
+    /* do something */
 }
 ```
