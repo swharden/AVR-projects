@@ -41,8 +41,8 @@ sei(); // enable global interrupts
 ```c
 ISR(TCA0_OVF_vect)
 {
-	/* do something */
-	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled
+    /* do something */
+    TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled
 }
 ```
 
@@ -79,6 +79,6 @@ sei(); // enable global interrupts
 ISR(TCB0_INT_vect)
 {
     /* do something */
-	TCB0.INTFLAGS = TCB_OVF_bm; // indicate interrupt was handled
+    TCB0.INTFLAGS = TCB_OVF_bm; // indicate interrupt was handled
 }
 ```
