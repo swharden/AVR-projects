@@ -1,17 +1,20 @@
-#define F_CPU 4000000UL
+#define F_CPU 24000000UL
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include <util/delay.h>
 
 int main(void)
 {
-	PORTD.DIR = 255;
+	CCP = CCP_IOREG_gc; // Protected write
+	CLKCTRL.OSCHFCTRLA = CLKCTRL_FRQSEL_24M_gc; // Set clock to 24MHz
 	
-    while (1) 
-    {
-		PORTD.OUT = 255;
-		_delay_ms(100);
-		PORTD.OUT = 0;
-		_delay_ms(900);
-    }
-}
+	PORTD.DIR = 0xFF;
 
+	while (1)
+	{
+		_delay_ms(500);
+		PORTD.OUT = 255;
+		_delay_ms(500);
+		PORTD.OUT = 0;
+	}
+}
