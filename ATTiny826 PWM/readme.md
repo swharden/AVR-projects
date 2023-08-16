@@ -1,6 +1,8 @@
 # ATTiny826 PWM
 
-## 16-bit PWM Output (TCA)
+TCA is a lot "smarter" and has more features than TCB, but both can do many similar things
+
+## TCA 16-bit PWM Output
 
 ```c
 // enable this peripheral
@@ -17,7 +19,34 @@ TCA0.SINGLE.PER = 1234; // top value
 TCA0.SINGLE.CMP0 = 123; // flip value
 ```
 
-## 8-bit PWM Output (TCB)
+## TCA 16-bit PWM Interrupts
+
+```c
+#include <avr/interrupt.h>
+```
+
+```c
+// enable this peripheral
+TCA0.SINGLE.CTRLA |= TCA_SINGLE_ENABLE_bm;
+
+// Overflow triggers interrupt
+TCA0.SINGLE.INTCTRL |= TCA_SINGLE_OVF_bm;
+
+// Set period and duty
+TCA0.SINGLE.PER = 2500; // 8 kHz at 20 mHz clock
+
+sei(); // enable global interrupts
+```
+
+```c
+ISR(TCA0_OVF_vect)
+{
+	/* do something */
+	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled
+}
+```
+
+## TCB 8-bit PWM Output
 
 ```c
 // Enable this peripheral
@@ -34,7 +63,7 @@ TCB0.CCMPL = 255; // top value
 TCB0.CCMPH = 100; // flip value
 ```
 
-## 16-bit PWM Interrupts (TCB)
+## TCB 16-bit PWM Interrupts
 
 ```c
 #include <avr/interrupt.h>
@@ -50,5 +79,6 @@ sei(); // enable global interrupts
 ISR(TCB0_INT_vect)
 {
     /* do something */
+	TCB0.INTFLAGS = TCB_OVF_bm; // indicate interrupt was handled
 }
 ```
