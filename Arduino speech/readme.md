@@ -1,5 +1,7 @@
 # Arduino Speech
 
+Additional information is on https://github.com/swharden/NumberSpeaker
+
 ```c
 const uint8_t AUDIO_SAMPLES[] PROGMEM = { 189, 160, 183, ... 128, 128, 128 };
 
