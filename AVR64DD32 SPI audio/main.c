@@ -73,12 +73,13 @@ void setup_TCA_Advance(){
 }
 
 volatile long AUDIO_ADDRESS;
-volatile uint8_t NEXT_LEVEL;
 
 ISR(TCA0_OVF_vect)
 {
-	TCB0.CCMPH = NEXT_LEVEL;
-	NEXT_LEVEL = SPI_read_byte(AUDIO_ADDRESS);
+	uint8_t val = SPI_read_byte(AUDIO_ADDRESS);
+	// wait until next rollover to update
+	while(TCB0.CNT > 0){}
+	TCB0.CCMPH = val;
 	AUDIO_ADDRESS++;
 	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled
 }
