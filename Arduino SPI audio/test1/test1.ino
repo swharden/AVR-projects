@@ -14,8 +14,6 @@ char spi_transfer(volatile char data) {
 }
 
 void setup() {
-  Serial.begin(9600);
-
   // configure SPI pins
   pinMode(MOSI, OUTPUT);
   pinMode(MISO, INPUT);
@@ -34,7 +32,7 @@ void setup() {
   TCCR2A |= bit(COM2B1);
   TCCR2B = bit(CS20);
 
-  SOURCE_ADDRESS = 599999;
+  SOURCE_ADDRESS = 0;
 }
 
 void loop() {
