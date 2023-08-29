@@ -66,6 +66,11 @@ ISR(TCD0_OVF_vect)
 {
 	TCD0.INTFLAGS = TCD_OVF_bm;
 }
+
+// Read the count like this
+TCD0.CTRLE = TCD_SCAPTUREA_bm;
+while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
+uint32_t count = TCD0.CAPTUREA;
 ```
 
 ## RTC
