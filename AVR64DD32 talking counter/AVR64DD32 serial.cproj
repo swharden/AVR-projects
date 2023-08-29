@@ -136,7 +136,10 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="audio.h">
+    <Compile Include="NumberSpeaker.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="NumberSpeakerAudio.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">

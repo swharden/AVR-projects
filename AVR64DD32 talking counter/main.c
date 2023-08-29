@@ -7,8 +7,11 @@ The signal to be counted is passed into EXTCLK (pin 30)
 and is counted asynchronously using PD0.
 
 Time base:
-A 10 MHz time base is clocked into XTAL32K1 (pin 20) and
-divided down so the count is measured exactly ten times per second.
+A 10 MHz time base is passed into XTAL32K1 (pin 20) and
+divided down so the counter is gated ten times per second.
+
+PWM audio:
+Audio waveforms are generated using PB0 outputting PWM on PA2 (pin 32).
 
 */
 #define F_CPU 24000000UL
@@ -20,7 +23,7 @@ divided down so the count is measured exactly ten times per second.
 #include <avr/interrupt.h>
 #include <avr/cpufunc.h>
 #include <avr/pgmspace.h>
-#include "audio.h"
+#include "NumberSpeaker.h"
 #include "Serial.h"
 
 void print_with_commas(unsigned long freq){
@@ -43,24 +46,32 @@ ISR(TCD0_OVF_vect)
 	COUNTER+=4096;
 }
 
-volatile uint32_t AUDIO_INDEX = 0;
-ISR(RTC_CNT_vect){ // called 78.125 kHz
-	update_count();
-	RTC.INTFLAGS = 0x11; // clear the flag
-}
-
+volatile uint16_t RTC_COUNT=0;
 uint8_t COUNT_NEW = 0;
 uint32_t COUNT_DISPLAY = 0;
 uint32_t COUNT_NOW = 0;
 uint32_t COUNT_PREVIOUS = 0;
-void update_count(){
-	TCD0.CTRLE = TCD_SCAPTUREA_bm;
-	while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
-	COUNT_NOW = COUNTER + TCD0.CAPTUREA;
-	COUNT_DISPLAY = COUNT_NOW - COUNT_PREVIOUS;
-	COUNT_DISPLAY = COUNT_DISPLAY * 5; // according to gate
-	COUNT_PREVIOUS = COUNT_NOW;
-	COUNT_NEW = 1;
+ISR(RTC_CNT_vect){
+	
+	// set PWM level for analog output
+	if (IsPlaying()){
+		TCB0.CCMPH = GetNextAudioLevel();
+	}
+	
+	// count ticks to gate counter
+	RTC_COUNT++;
+	if (RTC_COUNT == 800){
+		RTC_COUNT = 0;
+		TCD0.CTRLE = TCD_SCAPTUREA_bm;
+		while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
+		COUNT_NOW = COUNTER + TCD0.CAPTUREA;
+		COUNT_DISPLAY = COUNT_NOW - COUNT_PREVIOUS;
+		COUNT_DISPLAY = COUNT_DISPLAY * 10;
+		COUNT_PREVIOUS = COUNT_NOW;
+		COUNT_NEW = 1;
+	}
+	
+	RTC.INTFLAGS = 0x11; // interrupt handled
 }
 
 void setup_led(){
@@ -93,25 +104,19 @@ void setup_rtc_gate(){
 	
 	// Setup the RTC at 10 MHz to interrupt periodically
 	// 10 MHz with 128 prescaler is 78,125 ticks/sec
-	RTC.CTRLA = RTC_PRESCALER_DIV128_gc | RTC_RTCEN_bm;
-	RTC.PER = 15624; // 5 overflows per second (78125/5-1)
+	RTC.CTRLA = RTC_PRESCALER_DIV1_gc | RTC_RTCEN_bm;
+	RTC.PER = 1250-1; // 8kHz
 	RTC.INTCTRL = RTC_OVF_bm;
 	RTC.CLKSEL = RTC_CLKSEL_XTAL32K_gc; // clock in XOSC23K pin
 }
 
 void setup_TCB_PWM(){
-	// Enable this peripheral
-	TCB0.CTRLA |= TCB_ENABLE_bm;
-	
-	// Make waveform output available on the pin
-	TCB0.CTRLB |= TCB_CCMPEN_bm;
-	
-	// Enable 8-bit PWM mode
-	TCB0.CTRLB |= TCB_CNTMODE_PWM8_gc;
-	
-	// Set period and duty
-	TCB0.CCMPL = 255; // top value
-	TCB0.CCMPH = 50; // flip value
+	PORTA.DIRSET = PIN2_bm;
+	TCB0.CTRLA |= TCB_ENABLE_bm; // Enable the timer
+	TCB0.CTRLB |= TCB_CCMPEN_bm; // Output on PA2 (pin 32)
+	TCB0.CTRLB |= TCB_CNTMODE_PWM8_gc; // 8-bit PWM mode
+	TCB0.CCMPL = 255; // period
+	TCB0.CCMPH = 50; // duty
 }
 
 int main(void)
@@ -126,7 +131,18 @@ int main(void)
 	sei(); // Enable global interrupts
 	
 	printf("\r\nSTARTING...\r\n");
+	
+	uint8_t count = 0;
 	while (1){
+		
+		if (!IsPlaying()){
+			speak_digit(count);
+			count++;
+			if (count>=11){
+				count = 0;
+			}
+		}
+		
 		if(COUNT_NEW){
 			COUNT_NEW = 0;
 			print_with_commas(COUNT_DISPLAY);
