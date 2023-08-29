@@ -42,27 +42,23 @@ ISR(TCD0_OVF_vect)
 	COUNTER+=4096;
 }
 
-volatile uint32_t GATE_TICKS = 0;
-ISR(RTC_PIT_vect){
-	RTC.PITINTFLAGS = 1; // clear the flag
-	GATE_TICKS++;
-	if (GATE_TICKS == 78125){
-		update_count();
-		GATE_TICKS = 0;
-	}
-}
-
+uint8_t RTC_OVERFLOWS = 0;
 uint8_t COUNT_NEW = 0;
 uint32_t COUNT_DISPLAY = 0;
 uint32_t COUNT_NOW = 0;
 uint32_t COUNT_PREVIOUS = 0;
-void update_count(){
-	TCD0.CTRLE = TCD_SCAPTUREA_bm;
-	while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
-	COUNT_NOW = COUNTER + TCD0.CAPTUREA;
-	COUNT_DISPLAY = COUNT_NOW - COUNT_PREVIOUS;
-	COUNT_PREVIOUS = COUNT_NOW;
-	COUNT_NEW = 1;
+ISR(RTC_CNT_vect){
+	RTC_OVERFLOWS++;
+	if (RTC_OVERFLOWS == 5){
+		RTC_OVERFLOWS = 0;
+		TCD0.CTRLE = TCD_SCAPTUREA_bm;
+		while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
+		COUNT_NOW = COUNTER + TCD0.CAPTUREA;
+		COUNT_DISPLAY = COUNT_NOW - COUNT_PREVIOUS;
+		COUNT_PREVIOUS = COUNT_NOW;
+		COUNT_NEW = 1;
+	}
+	RTC.INTFLAGS = 0x11;
 }
 
 void setup_led(){
@@ -96,8 +92,8 @@ void setup_rtc_gate(){
 	// Setup the RTC at 10 MHz to interrupt periodically
 	// 10 MHz with 128 prescaler is 78,125 ticks/sec
 	RTC.CTRLA = RTC_PRESCALER_DIV128_gc | RTC_RTCEN_bm;
-	RTC.PITINTCTRL = 1; // periodic timer interrupt
-	RTC.PITCTRLA = RTC_PERIOD_CYC128_gc | RTC_PITEN_bm;
+	RTC.PER = 15624; // 5 overflows per second (78125/5-1)
+	RTC.INTCTRL = RTC_OVF_bm;
 	RTC.CLKSEL = RTC_CLKSEL_XTAL32K_gc; // clock in XOSC23K pin
 }
 
