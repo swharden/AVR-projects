@@ -7,8 +7,8 @@ The signal to be counted is passed into EXTCLK (pin 30)
 and is counted asynchronously using PD0.
 
 Time base:
-A 28.704 MHz crystal is clocked into XTAL32K1 (pin 20) and
-divided down to produce an interrupt 5 times per second.
+A 10 MHz time base is clocked into XTAL32K1 (pin 20) and
+divided down so the count is measured exactly once per second.
 
 */
 #define F_CPU 24000000UL
@@ -35,38 +35,34 @@ void led_toggle(){
 	PORTD.OUTTGL = PIN7_bm;
 }
 
-volatile uint32_t COUNTER_OVERFLOWS;
+volatile uint32_t COUNTER;
 ISR(TCD0_OVF_vect)
 {
 	TCD0.INTFLAGS = TCD_OVF_bm;
-	COUNTER_OVERFLOWS++;
+	COUNTER+=4096;
 }
 
-volatile uint8_t TIMER_READY = 0;
-volatile int TIMER_OVERFLOWS = 0;
-uint32_t count_last = 0;
-ISR(RTC_CNT_vect){
-	RTC.INTFLAGS = RTC_OVF_bm;
-	TIMER_OVERFLOWS++;
-	led_toggle();
-	if (TIMER_OVERFLOWS < 5)
-	return;
-	
-	TIMER_OVERFLOWS = 0;
+volatile uint32_t GATE_TICKS = 0;
+ISR(RTC_PIT_vect){
+	RTC.PITINTFLAGS = 1; // clear the flag
+	GATE_TICKS++;
+	if (GATE_TICKS == 78125){
+		update_count();
+		GATE_TICKS = 0;
+	}
+}
 
-	uint32_t tmp = 0;
+uint8_t COUNT_NEW = 0;
+uint32_t COUNT_DISPLAY = 0;
+uint32_t COUNT_NOW = 0;
+uint32_t COUNT_PREVIOUS = 0;
+void update_count(){
 	TCD0.CTRLE = TCD_SCAPTUREA_bm;
 	while ((TCD0.STATUS & TCD_CMDRDY_bm) == 0);
-	tmp = TCD0.CAPTUREA;
-
-	uint32_t count_now;
-	count_now = COUNTER_OVERFLOWS * 0x0FFF;
-	count_now += tmp;
-
-	uint32_t count_diff = count_now - count_last;
-	count_last = count_now;
-
-	print_with_commas(count_diff);
+	COUNT_NOW = COUNTER + TCD0.CAPTUREA;
+	COUNT_DISPLAY = COUNT_NOW - COUNT_PREVIOUS;
+	COUNT_PREVIOUS = COUNT_NOW;
+	COUNT_NEW = 1;
 }
 
 void setup_led(){
@@ -86,7 +82,7 @@ void setup_extclk_counter(){
 	
 	// Setup TCD to count the external clock
 	TCD0.CMPBCLR = 0x0FFF; // count to max
-	TCD0.CTRLA = TCD_CLKSEL_EXTCLK_gc;
+	TCD0.CTRLA = TCD_CLKSEL_EXTCLK_gc; // count external clock input
 	TCD0.INTCTRL = TCD_OVF_bm; // Enable overflow interrupt
 	while (!(TCD0.STATUS & 0x01)); // ENRDY
 	TCD0.CTRLA |= TCD_ENABLE_bm; // EXTCLK, enable
@@ -98,12 +94,11 @@ void setup_rtc_gate(){
 	CLKCTRL.XOSC32KCTRLA = CLKCTRL_SEL_bm | CLKCTRL_ENABLE_bm; // External clock on the XTAL32K1 pin, enable
 	
 	// Setup the RTC at 10 MHz to interrupt periodically
-	// 28.704 MHz with 256 prescaler is 112,125 ticks/sec
-	RTC.CTRLA = RTC_PRESCALER_DIV256_gc | RTC_RTCEN_bm;
-	RTC.INTCTRL = RTC_OVF_bm; // interrupt on overflow
+	// 10 MHz with 128 prescaler is 78,125 ticks/sec
+	RTC.CTRLA = RTC_PRESCALER_DIV128_gc | RTC_RTCEN_bm;
+	RTC.PITINTCTRL = 1; // periodic timer interrupt
+	RTC.PITCTRLA = RTC_PERIOD_CYC128_gc | RTC_PITEN_bm;
 	RTC.CLKSEL = RTC_CLKSEL_XTAL32K_gc; // clock in XOSC23K pin
-	RTC.PER = 22425; // set period for 5 overflows per second
-	
 }
 
 int main(void)
@@ -117,5 +112,10 @@ int main(void)
 	sei(); // Enable global interrupts
 	
 	printf("\r\nSTARTING...\r\n");
-	while (1){}
+	while (1){
+		if(COUNT_NEW){
+			COUNT_NEW = 0;
+			print_with_commas(COUNT_DISPLAY);
+		}
+	}
 }
