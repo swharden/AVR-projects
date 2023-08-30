@@ -4,7 +4,14 @@ const uint8_t* AUDIO_P1; // address currently being played
 const uint8_t* AUDIO_P2; // last address in the array being played
 
 #define IsPlaying() AUDIO_P1 < AUDIO_P2
-#define GetNextAudioLevel() pgm_read_byte(AUDIO_P1++)
+
+uint8_t GetNextAudioLevel() {
+	if (AUDIO_P1 < AUDIO_P2){
+		return pgm_read_byte(AUDIO_P1++);
+		} else {
+		return 128;
+	}
+}
 
 void speak_digit(uint8_t digit) {
 	switch (digit) {
@@ -73,6 +80,14 @@ void speak_point(){
 }
 
 void speak_digits(uint32_t value){
+	
+	if (value == 0){
+		printf("0 ");
+		speak_digit(0);
+		while(IsPlaying()){}
+		return;
+	}
+	
 	uint32_t divisor = 1000000000;
 	uint8_t real_numbers_seen = 0;
 	while(divisor > 0){
@@ -91,10 +106,18 @@ void speak_digits(uint32_t value){
 		value = value - (digit*divisor);
 		divisor /= 10;
 	}
+	
 	printf("\r\n");
 }
 
 void speak_mhz(uint32_t frequency, uint8_t decimals){
+	
+	if (frequency == 0){
+		printf("0");
+		speak_digit(0);
+		return;
+	}
+	
 	uint32_t divisor = 1000000000;
 	uint8_t real_numbers_seen = 0;
 	
@@ -114,7 +137,7 @@ void speak_mhz(uint32_t frequency, uint8_t decimals){
 			printf("%d ", digit);
 			speak_digit(digit);
 			if (divisor==1000000){
-				printf(". ", digit);
+				printf(". ");
 				speak_point();
 			}
 		}
