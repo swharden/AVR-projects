@@ -28,6 +28,14 @@ void led_toggle(){
 	PORTD.OUTTGL = PIN7_bm;
 }
 
+void led_on(){
+	PORTD.OUTSET = PIN7_bm;
+}
+
+void led_off(){
+	PORTD.OUTCLR = PIN7_bm;
+}
+
 volatile uint32_t COUNTER;
 ISR(TCD0_OVF_vect)
 {
@@ -108,6 +116,15 @@ void setup_TCB_PWM(){
 	TCB0.CCMPH = 50; // duty
 }
 
+void setup_button(){
+	PORTF.DIRCLR = PIN5_bm; // pin 25
+	PORTF.PIN5CTRL = PORT_PULLUPEN_bm;
+}
+
+void wait_for_button_press(){
+	while(PORTF.IN & PIN5_bm){}
+}
+
 int main(void)
 {
 	setup_system_clock_24MHz();
@@ -116,16 +133,16 @@ int main(void)
 	setup_extclk_counter();
 	setup_rtc_gate();
 	setup_TCB_PWM();
+	setup_button();
 	
 	sei(); // Enable global interrupts
 	
 	printf("\r\nSTARTING...\r\n");
 	
 	while (1){
-		if(COUNT_NEW){
-			COUNT_NEW = 0;
-			speak_mhz(COUNT_DISPLAY, 3);
-		}
-		_delay_ms(1000);
+		wait_for_button_press();
+		led_on();
+		speak_mhz(COUNT_DISPLAY, 3);
+		led_off();
 	}
 }
