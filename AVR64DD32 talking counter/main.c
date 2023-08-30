@@ -18,22 +18,11 @@ Audio waveforms are generated using PB0 outputting PWM on PA2 (pin 32).
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include <string.h>
-#include <stdio.h>
 #include <avr/interrupt.h>
 #include <avr/cpufunc.h>
 #include <avr/pgmspace.h>
 #include "NumberSpeaker.h"
 #include "Serial.h"
-
-void print_with_commas(unsigned long freq){
-	int millions = freq / 1000000;
-	freq -= millions * 1000000;
-	int thousands = freq / 1000;
-	freq -= thousands * 1000;
-	int ones = freq;
-	printf("%d,%03d,%03d\r\n", millions, thousands, ones);
-}
 
 void led_toggle(){
 	PORTD.OUTTGL = PIN7_bm;
@@ -132,20 +121,11 @@ int main(void)
 	
 	printf("\r\nSTARTING...\r\n");
 	
-	uint8_t count = 0;
 	while (1){
-		
-		if (!IsPlaying()){
-			speak_digit(count);
-			count++;
-			if (count>=11){
-				count = 0;
-			}
-		}
-		
 		if(COUNT_NEW){
 			COUNT_NEW = 0;
-			print_with_commas(COUNT_DISPLAY);
+			speak_mhz(COUNT_DISPLAY, 3);
 		}
+		_delay_ms(1000);
 	}
 }
