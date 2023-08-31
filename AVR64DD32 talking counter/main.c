@@ -10,8 +10,11 @@ Time base:
 A 10 MHz time base is passed into XTAL32K1 (pin 20) and
 divided down so the counter is gated ten times per second.
 
-PWM audio:
-Audio waveforms are generated using PB0 outputting PWM on PA2 (pin 32).
+Audio output:
+Waveforms are generated using DAC (pin 16).
+
+Button:
+Pin 25 is pulled high. Ground to indicate a button press.
 
 */
 #define F_CPU 24000000UL
@@ -52,7 +55,7 @@ ISR(RTC_CNT_vect){
 	
 	// set PWM level for analog output
 	if (IsPlaying()){
-		TCB0.CCMPH = GetNextAudioLevel();
+		DAC0.DATA = GetNextAudioLevel() << 8;
 	}
 	
 	// count ticks to gate counter
@@ -107,22 +110,17 @@ void setup_rtc_gate(){
 	RTC.CLKSEL = RTC_CLKSEL_XTAL32K_gc; // clock in XOSC23K pin
 }
 
-void setup_TCB_PWM(){
-	PORTA.DIRSET = PIN2_bm;
-	TCB0.CTRLA |= TCB_ENABLE_bm; // Enable the timer
-	TCB0.CTRLB |= TCB_CCMPEN_bm; // Output on PA2 (pin 32)
-	TCB0.CTRLB |= TCB_CNTMODE_PWM8_gc; // 8-bit PWM mode
-	TCB0.CCMPL = 255; // period
-	TCB0.CCMPH = 50; // duty
-}
-
 void setup_button(){
 	PORTF.DIRCLR = PIN5_bm; // pin 25
 	PORTF.PIN5CTRL = PORT_PULLUPEN_bm;
 }
 
 void wait_for_button_press(){
-	while(PORTF.IN & PIN5_bm){}
+	while(PORTF.IN & PIN5_bm){} // pin 25
+}
+
+void setup_DAC(){
+	DAC0.CTRLA = DAC_OUTEN_bm | DAC_ENABLE_bm;
 }
 
 int main(void)
@@ -132,17 +130,22 @@ int main(void)
 	setup_led();
 	setup_extclk_counter();
 	setup_rtc_gate();
-	setup_TCB_PWM();
+	setup_DAC();
 	setup_button();
 	
 	sei(); // Enable global interrupts
 	
 	printf("\r\nSTARTING...\r\n");
 	
+	speak_digit(1);
+	speak_point();
+	speak_digit(0);
+	
 	while (1){
 		wait_for_button_press();
 		led_on();
 		speak_mhz(COUNT_DISPLAY, 3);
+		_delay_ms(200);
 		led_off();
 	}
 }

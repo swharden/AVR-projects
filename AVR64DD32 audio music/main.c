@@ -39,12 +39,14 @@ volatile long AUDIO_INDEX = 0;
 
 ISR(TCA0_OVF_vect)
 {
+	uint8_t data;
 	if (AUDIO_INDEX < sizeof(AUDIO_SAMPLES_1)){
-		TCB0.CCMPH = pgm_read_byte(&AUDIO_SAMPLES_1[AUDIO_INDEX]);
+		data = pgm_read_byte(&AUDIO_SAMPLES_1[AUDIO_INDEX]);
 		} else {
 		long index = AUDIO_INDEX-sizeof(AUDIO_SAMPLES_1);
-		TCB0.CCMPH = pgm_read_byte(&AUDIO_SAMPLES_2[index]);
+		data = pgm_read_byte(&AUDIO_SAMPLES_2[index]);
 	}
+	DAC0.DATA = data << 5;
 	
 	AUDIO_INDEX++;
 	
@@ -56,6 +58,10 @@ ISR(TCA0_OVF_vect)
 	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm; // indicate interrupt was handled
 }
 
+void setup_DAC(){
+	DAC0.CTRLA = DAC_OUTEN_bm | DAC_ENABLE_bm;
+}
+
 int main(void)
 {
 	CCP = CCP_IOREG_gc; // Protected write
@@ -64,7 +70,8 @@ int main(void)
 	PORTA.DIR = 0xFF;
 	PORTD.DIR = 0xFF;
 
-	setup_TCB_PWM();
+	//setup_TCB_PWM();
+	setup_DAC();
 	setup_TCA_Advance();
 	sei();
 
