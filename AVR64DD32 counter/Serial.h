@@ -1,6 +1,9 @@
 #ifndef SERIAL_H_
 #define SERIAL_H_
 
+#include <string.h>
+#include <stdio.h>
+
 #define USART0_BAUD_RATE(BAUD_RATE) ((float)(F_CPU * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
 static void USART0_sendChar(char c)
@@ -41,6 +44,15 @@ void setup_serial(void)
 	
 	// direct printf() output to this serial port
 	stdout = &USART_stream;
+}
+
+void print_with_commas(unsigned long freq){
+	int millions = freq / 1000000;
+	freq -= millions * 1000000;
+	int thousands = freq / 1000;
+	freq -= thousands * 1000;
+	int ones = freq;
+	printf("%d,%03d,%03d\r\n", millions, thousands, ones);
 }
 
 #endif /* SERIAL_H_ */

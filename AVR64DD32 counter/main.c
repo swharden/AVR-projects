@@ -22,15 +22,6 @@ divided down so the count is measured exactly once per second.
 
 #include "Serial.h"
 
-void print_with_commas(unsigned long freq){
-	int millions = freq / 1000000;
-	freq -= millions * 1000000;
-	int thousands = freq / 1000;
-	freq -= thousands * 1000;
-	int ones = freq;
-	printf("%d,%03d,%03d\r\n", millions, thousands, ones);
-}
-
 void led_toggle(){
 	PORTD.OUTTGL = PIN7_bm;
 }
@@ -47,7 +38,8 @@ uint8_t COUNT_NEW = 0;
 uint32_t COUNT_DISPLAY = 0;
 uint32_t COUNT_NOW = 0;
 uint32_t COUNT_PREVIOUS = 0;
-ISR(RTC_CNT_vect){
+
+void handle_5hz_tick(){
 	RTC_OVERFLOWS++;
 	if (RTC_OVERFLOWS == 5){
 		RTC_OVERFLOWS = 0;
@@ -58,7 +50,16 @@ ISR(RTC_CNT_vect){
 		COUNT_PREVIOUS = COUNT_NOW;
 		COUNT_NEW = 1;
 	}
+}
+
+ISR(RTC_CNT_vect){
+	handle_5hz_tick();
 	RTC.INTFLAGS = 0x11;
+}
+
+ISR(TCA0_OVF_vect){
+	handle_5hz_tick();
+	TCA0.SINGLE.INTFLAGS = TCA_SINGLE_OVF_bm;
 }
 
 void setup_led(){
@@ -66,9 +67,13 @@ void setup_led(){
 }
 
 void setup_system_clock_24MHz(){
+	// Enable clock output on pin 5
+	CCP = CCP_IOREG_gc;
+	CLKCTRL.MCLKCTRLA = CLKCTRL_CLKOUT_bm;
+	
 	// Use the highest frequency system clock (24 MHz)
 	CCP = CCP_IOREG_gc;
-	CLKCTRL.OSCHFCTRLA = CLKCTRL_FRQSEL_24M_gc;
+	CLKCTRL.OSCHFCTRLA = CLKCTRL_FRQSEL_24M_gc | CLKCTRL_CLKOUT_bm;
 }
 
 void setup_extclk_counter(){
@@ -84,7 +89,7 @@ void setup_extclk_counter(){
 	TCD0.CTRLA |= TCD_ENABLE_bm; // EXTCLK, enable
 }
 
-void setup_rtc_gate(){
+void setup_gate_rtc(){
 	// Enable the RTC
 	CCP = CCP_IOREG_gc;
 	CLKCTRL.XOSC32KCTRLA = CLKCTRL_SEL_bm | CLKCTRL_ENABLE_bm; // External clock on the XTAL32K1 pin, enable
@@ -97,13 +102,27 @@ void setup_rtc_gate(){
 	RTC.CLKSEL = RTC_CLKSEL_XTAL32K_gc; // clock in XOSC23K pin
 }
 
+void setup_gate_sysclk(){
+	// 24 MHz clock div 256 is 93,750 ticks/second
+	TCA0.SINGLE.CTRLA = TCA_SINGLE_CLKSEL_DIV256_gc | TCA_SINGLE_ENABLE_bm;
+	
+	// enable overflow interrupt
+	TCA0.SINGLE.INTCTRL |= TCA_SINGLE_OVF_bm;
+	
+	// overflow 5 times per second
+	TCA0.SINGLE.PER = 18750-1;
+}
+
 int main(void)
 {
 	setup_system_clock_24MHz();
 	setup_serial();
 	setup_led();
 	setup_extclk_counter();
-	setup_rtc_gate();
+	
+	// Use one gate source or the other but not both
+	//setup_gate_rtc(); // Gate using 10 MHz signal on pin 20
+	setup_gate_sysclk(); // Gate using system clock
 	
 	sei(); // Enable global interrupts
 	
