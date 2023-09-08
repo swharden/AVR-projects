@@ -18,7 +18,8 @@ PC1 (pin 7)
 PC2 (pin 8)
 PC3 (pin 9)
 
-ADC INPUT:
+ADC: DIFFERENTIAL INPUT
+PF4/AIN20 (pin 24)
 PF5/AIN21 (pin 25)
 */
 
@@ -98,30 +99,11 @@ ISR(TCB0_INT_vect)
 
 void setup_adc(void)
 {
-	VREF.ADC0REF = VREF_ALWAYSON_bm | VREF_REFSEL_VDD_gc; // VDD reference
-	
-	/* Disable digital input buffer */
-	PORTA.PIN3CTRL &= ~PORT_ISC_gm;
-	PORTA.PIN3CTRL |= PORT_ISC_INPUT_DISABLE_gc;
-	
-	/* Disable pull-up resistor */
-	PORTA.PIN3CTRL &= ~PORT_PULLUPEN_bm;
-
-	ADC0.CTRLA = ADC_FREERUN_bm | ADC_ENABLE_bm; // free-running 12-bit ADC
-	ADC0.CTRLC = ADC_PRESC_DIV4_gc; // why?
-	ADC0.MUXPOS  = ADC_MUXPOS_AIN21_gc; // pin 25
+	ADC0.CTRLA = ADC_FREERUN_bm | ADC_CONVMODE_bm | ADC_ENABLE_bm; // free-running differential 12-bit ADC
+	ADC0.CTRLC = ADC_PRESC_DIV96_gc; // why?
+	ADC0.MUXPOS = ADC_MUXPOS_AIN21_gc; // pin 25
+	ADC0.MUXNEG = ADC_MUXPOS_AIN20_gc; // pin 24
 	ADC0.COMMAND = ADC_STCONV_bm; // start conversions
-}
-
-uint8_t ADC0_conversionDone(void)
-{
-	return (ADC0.INTFLAGS & ADC_RESRDY_bm);
-}
-
-uint16_t ADC0_read(void)
-{
-	ADC0.INTFLAGS = ADC_RESRDY_bm;
-	return ADC0.RES;
 }
 
 int main(void)
@@ -133,11 +115,14 @@ int main(void)
 	setup_adc();
 	sei();
 	
+	_delay_ms(100);
+	uint16_t baseline = ADC0.RES;
+	
 	for(;;){
-		if (ADC0_conversionDone())
-		{
-			uint16_t reading = ADC0_read();
-			set_digits(reading);
+		uint16_t diff = ADC0.RES - baseline;
+		if (diff > 30000){
+			diff = -diff;
 		}
+		set_digits(diff);
 	}
 }
