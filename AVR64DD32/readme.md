@@ -1,8 +1,8 @@
 # AVR64DD32 
 
-## Pinout
+[AVR64DD32 datasheet](https://www.mouser.com/datasheet/2/268/AVR64DD32_28_Prelim_DataSheet_DS40002315B-2950084.pdf)
 
-![](avr64dd32-pinout.png)
+<a href="avr64dd32-pinout.png"><img src="avr64dd32-pinout.png" width=500></a>
 
 ## LED Blink
 
@@ -28,10 +28,6 @@ int main(void)
 	}
 }
 ```
-
-## Datasheet
-
-* https://www.mouser.com/datasheet/2/268/AVR64DD32_28_Prelim_DataSheet_DS40002315B-2950084.pdf
 
 ## TCB0 16-bit counter
 
@@ -90,4 +86,25 @@ RTC.PER = 22425; // set period for 5 overflows per second
 ISR(RTC_CNT_vect){
 	RTC.INTFLAGS = RTC_OVF_bm;
 }
+```
+
+## ADC
+
+```c
+/* Define the voltage reference (datasheet 21.5.1) */
+VREF.ADC0REF = VREF_ALWAYSON_bm | VREF_REFSEL_VDD_gc; // VDD
+
+/* Configure the pin so analog voltage can be read */
+PORTA.PIN3CTRL &= ~PORT_ISC_gm;
+PORTA.PIN3CTRL |= PORT_ISC_INPUT_DISABLE_gc;
+PORTA.PIN3CTRL &= ~PORT_PULLUPEN_bm;
+
+/* Setup the ADC */
+ADC0.CTRLA = ADC_FREERUN_bm | ADC_ENABLE_bm; // free-running 12-bit ADC
+ADC0.CTRLC = ADC_PRESC_DIV4_gc; // why?
+ADC0.MUXPOS  = ADC_MUXPOS_AIN21_gc; // pin 25
+ADC0.COMMAND = ADC_STCONV_bm; // start conversions
+
+/* Perform a reading */
+uint8_t reading = ADC0.RES;
 ```
