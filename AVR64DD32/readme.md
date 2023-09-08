@@ -94,11 +94,6 @@ ISR(RTC_CNT_vect){
 /* Define the voltage reference (datasheet 21.5.1) */
 VREF.ADC0REF = VREF_ALWAYSON_bm | VREF_REFSEL_VDD_gc; // VDD
 
-/* Configure the pin so analog voltage can be read */
-PORTA.PIN3CTRL &= ~PORT_ISC_gm;
-PORTA.PIN3CTRL |= PORT_ISC_INPUT_DISABLE_gc;
-PORTA.PIN3CTRL &= ~PORT_PULLUPEN_bm;
-
 /* Setup the ADC */
 ADC0.CTRLA = ADC_FREERUN_bm | ADC_ENABLE_bm; // free-running 12-bit ADC
 ADC0.CTRLC = ADC_PRESC_DIV4_gc; // why?
