@@ -1,5 +1,5 @@
 # AVR-projects
-This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedudures I would otherwise have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, ADC, etc). Each folder is self-contained and has batch scripts to set fuses to change the clock source (internal RC oscillator at 8MHz, div/8 for 1MHz, or external crystal typically up to 20 MHz)
+This repository contains a growing collection of individual AVR project files for various tasks. I personally use these projects as starting points for new microcontroller projects, or reference for common procedures I would otherwise have to go back to the datasheet for (timers, counters, frequency counting or synthesis, interrupts, UART, I2C, ADC, etc). Each folder is self-contained and has batch scripts to set fuses to change the clock source (internal RC oscillator at 8MHz, div/8 for 1MHz, or external crystal typically up to 20 MHz)
 
 **These are some of my favorites:**
 > 
@@ -19,7 +19,7 @@ I almost always use AVRISPmkII and AVRdude (launched from a batch script) to pro
 ### Software
 * Just install [WinAVR](https://sourceforge.net/projects/winavr/files/) and it should install drivers for common programmers.
 * I prefer to edit C code in [Notepad++](https://notepad-plus-plus.org/)
-* definately check out [AVRDudess](http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/) (a GUI for AVRdude) as an easy GUI to load flash onto chips
+* definitely check out [AVRDudess](http://blog.zakkemble.co.uk/avrdudess-a-gui-for-avrdude/) (a GUI for AVRdude) as an easy GUI to load flash onto chips
 
 ### Hardware
 * [AVR Programming in 64-bit Windows 7](http://www.swharden.com/wp/2013-05-07-avr-programming-in-64-bit-windows-7/) (should also work for windows 10)
@@ -29,8 +29,8 @@ I almost always use AVRISPmkII and AVRdude (launched from a batch script) to pro
 ### Programmers
 Note|Picture
 ---|---
-AVRISPmkII is a ceap, fast, and convenient AVR programmer. | ![AVRISPmkII](/ATTiny2313%202016-08-14%20clock%20divider/demo.jpg)
-Bus Pirate _technically_ can program AVRs, but it's so slow it's not practical. [Here's a post](http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python) I wrote about it. I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definately check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.| ![](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
+AVRISPmkII is a cheap, fast, and convenient AVR programmer. | ![AVRISPmkII](/ATTiny2313%202016-08-14%20clock%20divider/demo.jpg)
+Bus Pirate _technically_ can program AVRs, but it's so slow it's not practical. [Here's a post](http://www.swharden.com/wp/2016-07-14-controlling-bus-pirate-with-python) I wrote about it. I like the bus pirate when I need to use software to measure voltages and toggle pins. It's slow though, because the handshake it bit-banged and it takes tens of seconds to program an AVR. For just programming, I prefer an (ebay knockoff) AVR ISP mkII. Definitely check out AVRDudess as a GUI for AVRDude. I usually get a standard command for a project and put it in a batch file in the same folder.| ![](http://www.swharden.com/wp/wp-content/uploads/2016/07/IMG_7092-1-1-1024x768.jpg)
 AVRDudess can simplify programming of code and fuses. | ![avrdudess](resources/AVRDudess.jpg)
 
 ### Serial Terminal
